@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ProArena.API/ProArena.API.csproj" />
+  <Project Path="ProArena.Domain/ProArena.Domain.csproj" />
+  <Project Path="ProArena.Infrastructure/ProArena.Infrastructure.csproj" />
+</Solution>

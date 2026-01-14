@@ -1,0 +1,6 @@
+@ProArena.API_HostAddress = http://localhost:5098
+
+GET {{ProArena.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
