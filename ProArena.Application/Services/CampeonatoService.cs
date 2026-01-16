@@ -1,4 +1,5 @@
-﻿using ProArena.Application.Interfaces;
+﻿using ProArena.Application.DTOs;
+using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 using ProArena.Domain.Interfaces;
@@ -14,9 +15,9 @@ namespace ProArena.Application.Services
             _campeonatoRepository = campeonatoRepository;
         }
 
-        public async Task AdicionaCampeonato(Campeonato campeonato)
+        public async Task AdicionaCampeonato(RegistraCampeonatoDTO registraCampeonatoDTO)
         {
-            await _campeonatoRepository.AdicionaCampeonato(campeonato);
+
         }
 
         public async Task<ResultadoOperacao> BuscaCampeonatoPorId(int id)

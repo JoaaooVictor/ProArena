@@ -1,4 +1,5 @@
-﻿using ProArena.Application.Utils;
+﻿using ProArena.Application.DTOs;
+using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 
 namespace ProArena.Application.Interfaces
@@ -7,6 +8,6 @@ namespace ProArena.Application.Interfaces
     {
         Task<ResultadoOperacao> BuscaCampeonatoPorId(int id);
         Task<ResultadoOperacao> BuscaTodosCampeonatos();
-        Task AdicionaCampeonato(Campeonato campeonato);
+        Task AdicionaCampeonato(RegistraCampeonatoDTO registraCampeonatoDTO);
     }
 }
