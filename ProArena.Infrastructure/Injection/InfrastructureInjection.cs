@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ProArena.Domain;
+using ProArena.Domain.Interfaces;
 using ProArena.Infrastructure.Data.Context;
 using ProArena.Infrastructure.Repositories;
 

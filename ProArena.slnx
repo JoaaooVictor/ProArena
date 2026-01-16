@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="ProArena.API/ProArena.API.csproj" />
+  <Project Path="ProArena.Application/ProArena.Application.csproj" Id="bcb2e32f-c859-48df-9084-ee11543e2e0c" />
   <Project Path="ProArena.Domain/ProArena.Domain.csproj" />
   <Project Path="ProArena.Infrastructure/ProArena.Infrastructure.csproj" />
 </Solution>

@@ -4,6 +4,6 @@
     {
         public int EquipeId { get; set; }
         public string? Nome { get; set; }
-        public virtual List<Jogador> Jogadores { get; set; } = new List<Jogador>();
+        public virtual List<Jogador> Jogadores { get; set; } = null!;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProArena.Domain;
 using ProArena.Domain.Entities;
+using ProArena.Domain.Interfaces;
 using ProArena.Infrastructure.Data.Context;
 
 namespace ProArena.Infrastructure.Repositories

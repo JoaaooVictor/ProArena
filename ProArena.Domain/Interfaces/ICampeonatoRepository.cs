@@ -1,6 +1,6 @@
 ﻿using ProArena.Domain.Entities;
 
-namespace ProArena.Domain
+namespace ProArena.Domain.Interfaces
 {
     public interface ICampeonatoRepository
     {
