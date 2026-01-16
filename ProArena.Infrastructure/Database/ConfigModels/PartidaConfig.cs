@@ -15,14 +15,16 @@ namespace ProArena.Infrastructure.Database.ConfigModels
                 .HasKey(p => p.PartidaId);
 
             builder
+                .Property(e => e.PartidaId)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .Property(p => p.ResultadoEquipeB)
-                .HasMaxLength(3)
-                .IsRequired();
+                .HasMaxLength(3);
 
             builder
                 .Property(p => p.ResultadoEquipeA)
-                .HasMaxLength(3)
-                .IsRequired();
+                .HasMaxLength(3);
 
             builder
                 .HasOne(p => p.EquipeA)

@@ -8,9 +8,22 @@ namespace ProArena.Infrastructure.Data.ConfigModels
     {
         public void Configure(EntityTypeBuilder<Campeonato> builder)
         {
-            builder.HasKey(c => c.CampeonatoId);
-            builder.Property(c => c.Descricao).HasMaxLength(100).IsRequired(false);
-            builder.Property(c => c.CampeonatoId).ValueGeneratedOnAdd();
+            builder
+                .HasKey(c => c.CampeonatoId);
+
+            builder
+                .Property(c => c.Descricao)
+                .HasMaxLength(100)
+                .IsRequired(false);
+
+            builder
+                .Property(c => c.CampeonatoId)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .HasMany(c => c.Equipes)
+                .WithOne(e => e.Campeonato)
+                .HasForeignKey(e => e.CampeonatoId);
         }
     }
 }

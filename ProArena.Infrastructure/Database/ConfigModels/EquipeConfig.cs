@@ -12,8 +12,15 @@ namespace ProArena.Infrastructure.Database.ConfigModels
                 .HasKey(e => e.EquipeId);
 
             builder
+                .Property(e => e.EquipeId)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .HasMany(e => e.Jogadores)
+                .WithMany(j => j.Equipes);
+
+            builder
                 .Property(e => e.Nome)
-                .IsRequired()
                 .HasMaxLength(100);
 
             builder
