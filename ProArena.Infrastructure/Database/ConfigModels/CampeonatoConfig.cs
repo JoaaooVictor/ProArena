@@ -13,8 +13,7 @@ namespace ProArena.Infrastructure.Data.ConfigModels
 
             builder
                 .Property(c => c.Descricao)
-                .HasMaxLength(100)
-                .IsRequired(false);
+                .HasMaxLength(100);
 
             builder
                 .Property(c => c.CampeonatoId)

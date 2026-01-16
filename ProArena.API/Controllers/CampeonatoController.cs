@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
@@ -21,7 +20,7 @@ namespace ProArena.API.Controllers
         {
             var resultadoOperacao = await _campeonatoService.BuscaTodosCampeonatos();
 
-            if (resultadoOperacao.Erro) 
+            if (resultadoOperacao.Erro)
             {
                 return NotFound(resultadoOperacao.Mensagem);
             }
