@@ -35,7 +35,7 @@ namespace ProArena.Application.Services
         {
             var campeonatos = await _campeonatoRepository.BuscaTodosCampeonatos();
 
-            if (campeonatos is null)
+            if (campeonatos.Count == 0)
             {
                 return ResultadoOperacao.Falhou("Nenhum campeonato encontrado.");
             }

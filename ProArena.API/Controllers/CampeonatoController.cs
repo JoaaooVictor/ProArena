@@ -4,7 +4,7 @@ using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/campeonato")]
     [ApiController]
     public class CampeonatoController : ControllerBase
     {
@@ -16,13 +16,14 @@ namespace ProArena.API.Controllers
         }
 
         [HttpGet]
+        [Route("busca-todos-campeonatos")]
         public async Task<IActionResult> BuscaCampeonatos()
         {
             var resultadoOperacao = await _campeonatoService.BuscaTodosCampeonatos();
 
             if (resultadoOperacao.Erro) 
             {
-                return NotFound("Nenhum campeonato encontrado.");
+                return NotFound(resultadoOperacao.Mensagem);
             }
 
             return Ok(resultadoOperacao);

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProArena.Application\ProArena.Application.csproj" />
     <ProjectReference Include="..\ProArena.Domain\ProArena.Domain.csproj" />
   </ItemGroup>
 
