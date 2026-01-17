@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
 using ProArena.Application.Interfaces;
-using ProArena.Application.Utils;
-using ProArena.Domain.Entities;
 
 namespace ProArena.API.Controllers
 {
@@ -12,7 +9,7 @@ namespace ProArena.API.Controllers
     public class CampeonatoController : ControllerBase
     {
         private readonly ICampeonatoService _campeonatoService;
-        
+
 
         public CampeonatoController(ICampeonatoService campeonatoService)
         {
@@ -24,6 +21,20 @@ namespace ProArena.API.Controllers
         public async Task<IActionResult> BuscaCampeonatos()
         {
             var resultadoOperacao = await _campeonatoService.BuscaTodosCampeonatos();
+
+            if (resultadoOperacao.Erro)
+            {
+                return NotFound(resultadoOperacao.Mensagem);
+            }
+
+            return Ok(resultadoOperacao);
+        }
+
+        [HttpGet]
+        [Route("busca-campeonato-id")]
+        public async Task<IActionResult> BuscaCampeonatoPorId(int id)
+        {
+            var resultadoOperacao = await _campeonatoService.BuscaCampeonatoPorId(id);
 
             if (resultadoOperacao.Erro)
             {

@@ -16,6 +16,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(connectionString!);
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("FrontPolicy", policy =>
+    {
+        policy
+        .WithOrigins("http://localhost:5173/")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -30,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FrontPolicy");
 
 app.UseAuthorization();
 

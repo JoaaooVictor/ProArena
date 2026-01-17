@@ -52,11 +52,20 @@ namespace ProArena.Application.Services
 
         public async Task<ResultadoOperacao> BuscaTodosCampeonatos()
         {
-            var campeonatos = await _campeonatoRepository.BuscaTodosCampeonatos();
+            var campeonatos = new List<Campeonato>();
 
-            if (campeonatos.Count == 0)
+            try
             {
-                return ResultadoOperacao.Falhou("Nenhum campeonato encontrado.");
+                campeonatos = await _campeonatoRepository.BuscaTodosCampeonatos();
+
+                if (campeonatos.Count == 0)
+                {
+                    return ResultadoOperacao.Concluido("Nenhum campeonato encontrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return ResultadoOperacao.Falhou(ex.Message);
             }
 
             return ResultadoOperacao.Concluido("Campeonatos encontrados com sucesso.", campeonatos);
