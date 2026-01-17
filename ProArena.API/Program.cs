@@ -1,8 +1,12 @@
+using ProArena.Application;
+using ProArena.Application.Mappings;
 using ProArena.Infrastructure.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ProArenaConnection");
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
 

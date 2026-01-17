@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
+using ProArena.Domain.Entities;
 
 namespace ProArena.API.Controllers
 {
@@ -10,6 +12,7 @@ namespace ProArena.API.Controllers
     public class CampeonatoController : ControllerBase
     {
         private readonly ICampeonatoService _campeonatoService;
+        
 
         public CampeonatoController(ICampeonatoService campeonatoService)
         {
@@ -34,7 +37,7 @@ namespace ProArena.API.Controllers
         [Route("cria-campeonato")]
         public async Task<IActionResult> CriaCampeonato(RegistraCampeonatoDTO registraCampeonatoDTO)
         {
-            var resultadoOperacao = new ResultadoOperacao(true, ""); /*await _campeonatoService.AdicionaCampeonato();*/
+            var resultadoOperacao = await _campeonatoService.AdicionaCampeonato(registraCampeonatoDTO);
 
             if (resultadoOperacao.Erro)
             {
