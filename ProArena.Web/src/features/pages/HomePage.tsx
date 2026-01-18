@@ -1,79 +1,45 @@
-import '../styles/HomePage.css'
-import futvoleiImg from '../assets/home-page-quadra.jpeg';
+import '../styles/pages-styles/HomePage.css'
 import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 
 export function HomePage() {
     return (
         <>
-            <header className="header">
-                <Navbar />
-            </header>
+            <Navbar />
+            <main>
+                <section className="hero">
+                    <div className="container hero-content">
+                        <div className="hero-text">
+                            <h1>ProArena conectando quem joga!</h1>
+                            <p>
+                                Organize campeonatos, encontre parceiros e viva o melhor do
+                                futevôlei em um só lugar.
+                            </p>
+                        </div>
+                        <div className="group-botoes">
+                            <button className="botao-home">Encontrar Quadras</button>
+                            <button className="botao-home">Encontrar Jogadores</button>
+                        </div>
+                        <div className="container features-grid">
+                            <div className="feature-card">
+                                <h3>🏆 Campeonatos</h3>
+                                <p>Crie e participe de campeonatos com facilidade.</p>
+                            </div>
 
-            <section className="hero">
-                <div className="container hero-content">
-                    <div className="hero-text">
-                        <h1>Conectando atletas ao futevôlei</h1>
-                        <p>
-                            Organize campeonatos, encontre parceiros e viva o melhor do
-                            futevôlei em um só lugar.
-                        </p>
-                    </div>
+                            <div className="feature-card">
+                                <h3>📊 Rankings</h3>
+                                <p>Acompanhe desempenho e evolução.</p>
+                            </div>
 
-                    <div className="hero-image">
-                        <img
-                            alt="Jogo de futevôlei na praia"
-                            src={futvoleiImg}
-                        />
+                            <div className="feature-card">
+                                <h3>📍Localização</h3>
+                                <p>Encontre a quadra mais proxima de você.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            <section className="features">
-                <div className="container features-grid">
-                    <div className="feature-card">
-                        <h3>🏆 Campeonatos</h3>
-                        <p>Crie e participe de campeonatos com facilidade.</p>
-                    </div>
-
-                    <div className="feature-card">
-                        <h3>📊 Rankings</h3>
-                        <p>Acompanhe desempenho e evolução.</p>
-                    </div>
-
-                    <div className="feature-card">
-                        <h3>📊 Rankings</h3>
-                        <p>Acompanhe desempenho e evolução.</p>
-                    </div>
-
-                    <div className="feature-card">
-                        <h3>📊 Rankings</h3>
-                        <p>Acompanhe desempenho e evolução.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section className="hero">
-                <div className="container hero-content">
-                    <div className="hero-image">
-                        <img
-                            alt="Jogo de futevôlei na praia"
-                            src={futvoleiImg}
-                        />
-                    </div>
-                    
-                    <div className="hero-text">
-                        <h1>Conectando atletas ao futevôlei</h1>
-                        <p>
-                            Organize campeonatos, encontre parceiros e viva o melhor do
-                            futevôlei em um só lugar.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <footer className='footer'>
-                <p>Todos os direitos reservados ProArena 2026</p>
-            </footer>
+                </section>
+            </main>
+            <Footer />
         </>
     )
 }

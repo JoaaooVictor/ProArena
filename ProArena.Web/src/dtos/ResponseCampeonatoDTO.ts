@@ -1,6 +1,8 @@
 export interface ResponseCampeonatoDTO {
-    id: number
-    nome: string
-    dataInicio: string
-    local: string
+    CampeonatoId: number,
+    Descricao: string,
+    DataFim: string,
+    DataInicio: string,
+    EquipeDTO : [{}]
+    PartidaDTO : [{}]
 }

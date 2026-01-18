@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "../pages/HomePage";
 import { CampeonatoPage} from '../pages/CampeonatoPage';
+import { SobrePage} from '../pages/SobrePage';
 
 export function AppRoutes(){
     return(
@@ -8,6 +9,7 @@ export function AppRoutes(){
             <Routes>
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/campeonatos" element={<CampeonatoPage/>} />
+                <Route path="/sobre" element={<SobrePage/>} />
             </Routes>
         </BrowserRouter>
     )
