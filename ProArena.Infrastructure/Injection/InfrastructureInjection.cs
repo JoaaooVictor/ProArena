@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProArena.Application.Interfaces;
+using ProArena.Application.Mappings;
 using ProArena.Application.Services;
 using ProArena.Domain.Interfaces;
 using ProArena.Infrastructure.Data.Context;
@@ -17,6 +18,7 @@ namespace ProArena.Infrastructure.Injection
             // Registro Repositórios
             services.AddScoped<ICampeonatoRepository, CampeonatoRepository>();
 
+            // Registro Serviços
             services.AddScoped<ICampeonatoService, CampeonatoService>();
 
             return services;
