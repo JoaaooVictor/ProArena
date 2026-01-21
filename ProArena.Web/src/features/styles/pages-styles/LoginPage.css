@@ -1,0 +1,107 @@
+.login-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background-image: url('../../assets/home-page-quadra.jpeg');
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(10px);
+  transform: scale(1.1);
+
+  z-index: 0;
+}
+
+.box-login {
+  position: relative;
+  z-index: 2; 
+
+  width: 460px;
+  min-height: 450px;
+
+  background-color: #fff;
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-item {
+  width: 100%;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.group-item p {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.group-item form {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-item form > div {
+  display: flex;             
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.group-item label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.group-item input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.group-item button {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 4px;
+  border: none;
+
+  background-color: #4d4d4d;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.group-item button:hover {
+  background-color: #292929;
+}
+.esqueceu-senha{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.esqueceu-senha a{
+    text-decoration: none;
+    margin: 20px;
+    color: #000;
+}
+.esqueceu-senha a:hover{
+    color:cornflowerblue;
+}

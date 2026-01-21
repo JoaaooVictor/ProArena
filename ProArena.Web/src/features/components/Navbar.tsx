@@ -6,7 +6,7 @@ export function Navbar() {
         <>
         <header className="header">
             <div className="container header-content">
-                <h3 className="logo">ProArena</h3>
+                <h3 className="logo"><a href='/'>ProArena</a></h3>
 
                 <nav>
                     <ul className="nav-list">

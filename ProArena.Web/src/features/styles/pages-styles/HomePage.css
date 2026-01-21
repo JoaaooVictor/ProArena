@@ -10,7 +10,7 @@ body {
 
 .hero {
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   overflow: hidden;
   text-align: center;
 }
