@@ -13,6 +13,7 @@ namespace ProArena.Application.Utils
         {
             Erro = erro;
             Mensagem = mensagem;
+            TipoErro = tipoErro;
             Objeto = obj;
         }
 

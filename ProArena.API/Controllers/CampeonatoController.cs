@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
 {
-    [Route("api/campeonato")]
     [ApiController]
+    [Route("api/campeonato")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CampeonatoController : ControllerBase
     {
         private readonly ICampeonatoService _campeonatoService;

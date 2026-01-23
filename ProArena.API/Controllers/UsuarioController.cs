@@ -14,6 +14,11 @@ namespace ProArena.API.Controllers
             _usuarioService = usuarioService;
         }
 
+        /// <summary>
+        /// Cria usário de acordo com os parametros fornecidos, não necessita estar logado!
+        /// </summary>
+        /// <param name="">RegistraUsuarioDTO</param>
+        /// <returns>Status Code 201 - Created</returns>
         [HttpPost]
         [Route("registra-usuario")]
         public async Task<IActionResult> RegistraUsuario(RegistraUsuarioDTO registraUsuarioDTO)

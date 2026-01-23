@@ -36,8 +36,6 @@ namespace ProArena.Application.Services
             var audience = _jwtConfig.Audience;
             var expireMinutes = _jwtConfig.ExpireMinutes;
 
-            var user = await _usuarioRepository.BuscaUsuarioPorEmail(email);
-
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Email, email),
@@ -69,7 +67,7 @@ namespace ProArena.Application.Services
 
             if (!usuarioValido)
             {
-                return ResultadoOperacao.Concluido("Email ou Senha Incorretos", TipoErroOperacao.NaoAutorizado);
+                return ResultadoOperacao.Falhou("Email ou Senha Incorretos", TipoErroOperacao.NaoAutorizado);
             }
 
             var token = await GeraTokenJwt(loginUsuarioDTO.Email);

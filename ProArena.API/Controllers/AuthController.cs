@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Usuarios;
+using ProArena.Application.Enums;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
@@ -22,9 +23,9 @@ namespace ProArena.API.Controllers
         {
             var resultadoOperacao = await _authService.Login(loginUsuarioDTO);
 
-            if (resultadoOperacao.Erro)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoAutorizado)
             {
-                return BadRequest(resultadoOperacao);
+                return Unauthorized(resultadoOperacao);
             }
 
             return Ok(resultadoOperacao);

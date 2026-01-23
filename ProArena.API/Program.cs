@@ -1,3 +1,4 @@
+using ProArena.API.Extensions;
 using ProArena.Application.Injection;
 using ProArena.Application.Mappings;
 using ProArena.Application.Utils;
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ProArenaConnection");
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("Jwt"));
+
+builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -48,6 +51,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("FrontPolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
