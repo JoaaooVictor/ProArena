@@ -13,10 +13,10 @@ namespace ProArena.Infrastructure.Data.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProArenaContext).Assembly);
         }
-
         public DbSet<Campeonato> Campeonatos { get; set; }
         public DbSet<Jogador> Jogadores { get; set; }
         public DbSet<Partida> Partidas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Equipe> Equipes { get; set; }
     }
 }

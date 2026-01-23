@@ -10,7 +10,6 @@ namespace ProArena.API.Controllers
     {
         private readonly ICampeonatoService _campeonatoService;
 
-
         public CampeonatoController(ICampeonatoService campeonatoService)
         {
             _campeonatoService = campeonatoService;

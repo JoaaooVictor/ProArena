@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProArena.Application.Interfaces;
-using ProArena.Application.Mappings;
 using ProArena.Application.Services;
 using ProArena.Domain.Interfaces;
 using ProArena.Infrastructure.Data.Context;
@@ -13,13 +12,11 @@ namespace ProArena.Infrastructure.Injection
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ProArenaContext>(options =>options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ProArena.Infrastructure")));
+            services.AddDbContext<ProArenaContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ProArena.Infrastructure")));
 
             // Registro Repositórios
             services.AddScoped<ICampeonatoRepository, CampeonatoRepository>();
-
-            // Registro Serviços
-            services.AddScoped<ICampeonatoService, CampeonatoService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             return services;
         }

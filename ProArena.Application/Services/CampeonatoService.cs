@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ProArena.Application.DTOs;
+using ProArena.Application.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
@@ -25,17 +26,17 @@ namespace ProArena.Application.Services
 
                 if (campeonato is null)
                 {
-                    return ResultadoOperacao.Falhou("Erro ao mapear o campeonato.");
+                    return ResultadoOperacao.Falhou("Erro ao mapear o campeonato.", TipoErroOperacao.Mapeamento);
                 }
 
-                 await _campeonatoRepository.AdicionaCampeonato(campeonato);
+                await _campeonatoRepository.AdicionaCampeonato(campeonato);
             }
             catch (Exception ex)
             {
-                return ResultadoOperacao.Falhou(ex.Message);
+                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacao.Inesperado);
             }
 
-            return ResultadoOperacao.Concluido("Campeonato adicionado com sucesso.");
+            return ResultadoOperacao.Concluido("Campeonato adicionado com sucesso.", TipoErroOperacao.Nenhum);
         }
 
         public async Task<ResultadoOperacao> BuscaCampeonatoPorId(int id)
@@ -44,10 +45,10 @@ namespace ProArena.Application.Services
 
             if (campeonato is null)
             {
-                return ResultadoOperacao.Falhou("Campeonato não encontrado.");
+                return ResultadoOperacao.Falhou("Campeonato não encontrado.", TipoErroOperacao.NaoEncontrado);
             }
 
-            return ResultadoOperacao.Concluido("Campeonato encontrado com sucesso.", campeonato);
+            return ResultadoOperacao.Concluido("Campeonato encontrado com sucesso.", TipoErroOperacao.Nenhum, campeonato);
         }
 
         public async Task<ResultadoOperacao> BuscaTodosCampeonatos()
@@ -60,15 +61,15 @@ namespace ProArena.Application.Services
 
                 if (campeonatos.Count == 0)
                 {
-                    return ResultadoOperacao.Concluido("Nenhum campeonato encontrado.");
+                    return ResultadoOperacao.Concluido("Nenhum campeonato encontrado.", TipoErroOperacao.Nenhum);
                 }
             }
             catch (Exception ex)
             {
-                return ResultadoOperacao.Falhou(ex.Message);
+                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacao.Inesperado);
             }
 
-            return ResultadoOperacao.Concluido("Campeonatos encontrados com sucesso.", campeonatos);
+            return ResultadoOperacao.Concluido("Campeonatos encontrados com sucesso.", TipoErroOperacao.Nenhum, campeonatos);
         }
     }
 }

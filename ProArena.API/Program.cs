@@ -1,10 +1,13 @@
-using ProArena.Application;
+using ProArena.Application.Injection;
 using ProArena.Application.Mappings;
+using ProArena.Application.Utils;
 using ProArena.Infrastructure.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ProArenaConnection");
+
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -16,12 +19,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(connectionString!);
 
+builder.Services.AddServices(connectionString!);
+
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("FrontPolicy", policy =>
     {
         policy
-        .WithOrigins("http://localhost:5173/")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowAnyOrigin();
@@ -37,7 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProArenaV1");
-        c.RoutePrefix = "";
+        c.RoutePrefix = "swagger";
     });
 }
 
