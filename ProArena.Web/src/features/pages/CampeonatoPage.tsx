@@ -88,7 +88,6 @@ export function CampeonatoPage() {
                       <td>{campeonato.DataFim}</td>
                       <td>
                         <button title="Visualizar">🔍</button>
-                        <button title="Visualizar">🔍</button>
                       </td>
                     </tr>
                   ))}

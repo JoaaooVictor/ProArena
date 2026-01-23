@@ -24,7 +24,9 @@ namespace ProArena.Application.Services
         public async Task<string> GeraHashSenha(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
+            {
                 throw new ArgumentException("A senha está vazia", nameof(senha));
+            }
 
             return BCrypt.Net.BCrypt.HashPassword(senha);
         }

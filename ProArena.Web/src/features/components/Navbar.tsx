@@ -3,7 +3,6 @@ import '../styles/components-styles/Navbar.css';
 
 export function Navbar() {
     return (
-        <>
         <header className="header">
             <div className="container header-content">
                 <h3 className="logo"><a href='/'>ProArena</a></h3>
@@ -19,6 +18,5 @@ export function Navbar() {
                 </nav>
             </div>
         </header>
-        </>
     )
 }

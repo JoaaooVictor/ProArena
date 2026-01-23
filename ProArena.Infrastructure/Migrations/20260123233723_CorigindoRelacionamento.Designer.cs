@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProArena.Infrastructure.Data.Context;
 
@@ -11,9 +12,11 @@ using ProArena.Infrastructure.Data.Context;
 namespace ProArena.Infrastructure.Migrations
 {
     [DbContext(typeof(ProArenaContext))]
-    partial class ProArenaContextModelSnapshot : ModelSnapshot
+    [Migration("20260123233723_CorigindoRelacionamento")]
+    partial class CorigindoRelacionamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -26,6 +26,11 @@ namespace ProArena.Infrastructure.Database.ConfigModels
                 .Property(p => p.ResultadoEquipeA)
                 .HasMaxLength(3);
 
+            builder.HasOne(p => p.Campeonato)
+               .WithMany(c => c.Partidas)
+               .HasForeignKey(p => p.CampeonatoId)
+               .OnDelete(DeleteBehavior.Restrict);
+
             builder
                 .HasOne(p => p.EquipeA)
                 .WithMany()
