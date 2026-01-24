@@ -7,7 +7,7 @@
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
 
-        public List<RegistraEquipeDTO>? Equipes { get; set; }
-        public List<RegistraPartidaDTO>? Partidas { get; set; }
+        public List<RegistraEquipeDTO> Equipes { get; set; } = new();
+        public List<RegistraPartidaDTO> Partidas { get; set; } = new();
     }
 }

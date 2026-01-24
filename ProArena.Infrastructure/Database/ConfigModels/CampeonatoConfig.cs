@@ -16,6 +16,10 @@ namespace ProArena.Infrastructure.Data.ConfigModels
                 .HasMaxLength(100);
 
             builder
+                .Property(u => u.Nome)
+                .HasMaxLength(100);
+
+            builder
                 .Property(c => c.CampeonatoId)
                 .ValueGeneratedOnAdd();
 

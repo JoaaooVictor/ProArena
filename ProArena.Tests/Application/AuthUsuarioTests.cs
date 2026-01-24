@@ -62,8 +62,8 @@ namespace ProArena.Tests.Application
         {
             var dto = new LoginUsuarioDTO
             {
-                Email = null,
-                Senha = null
+                Email = null!,
+                Senha = null!
             };
 
             // Act

@@ -17,6 +17,7 @@ namespace ProArena.Infrastructure.Injection
             // Registro Repositórios
             services.AddScoped<ICampeonatoRepository, CampeonatoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IJogadorRepository, JogadorRepository>();
 
             return services;
         }
