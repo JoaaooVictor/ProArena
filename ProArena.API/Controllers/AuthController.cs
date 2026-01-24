@@ -7,7 +7,7 @@ using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace ProArena.API.Controllers
             _authService = authService;
         }
 
+        [Route("login-usuario")]
         [HttpPost]
         public async Task<IActionResult> Login(LoginUsuarioDTO loginUsuarioDTO)
         {
@@ -26,6 +27,11 @@ namespace ProArena.API.Controllers
             if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoAutorizado)
             {
                 return Unauthorized(resultadoOperacao);
+            }
+
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoEncontrado)
+            {
+                return BadRequest(resultadoOperacao);
             }
 
             return Ok(resultadoOperacao);

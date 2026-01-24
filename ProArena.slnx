@@ -1,6 +1,10 @@
 <Solution>
-  <Project Path="ProArena.API/ProArena.API.csproj" DisplayName="ProArena.Api" />
+  <Folder Name="/Itens de Solução/">
+    <File Path="test.runsettings" />
+  </Folder>
+  <Project Path="ProArena.API/ProArena.API.csproj" />
   <Project Path="ProArena.Application/ProArena.Application.csproj" Id="bcb2e32f-c859-48df-9084-ee11543e2e0c" />
   <Project Path="ProArena.Domain/ProArena.Domain.csproj" />
   <Project Path="ProArena.Infrastructure/ProArena.Infrastructure.csproj" />
+  <Project Path="ProArena.Tests/ProArena.Tests.csproj" Id="855c8988-f45e-4c8e-ba79-ab4732030c6b" />
 </Solution>

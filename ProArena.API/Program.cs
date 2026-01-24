@@ -3,6 +3,9 @@ using ProArena.Application.Injection;
 using ProArena.Application.Mappings;
 using ProArena.Application.Utils;
 using ProArena.Infrastructure.Injection;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("ProArena.Tests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,3 +62,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }
