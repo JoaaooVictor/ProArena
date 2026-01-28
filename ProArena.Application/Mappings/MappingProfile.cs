@@ -25,7 +25,11 @@ namespace ProArena.Application.Mappings
                 .ForMember(r => r.Nome, opt => opt.MapFrom(u => u.Nome))
                 .ForMember(r => r.Cpf, opt => opt.MapFrom(u => u.Cpf))
                 .ForMember(r => r.Idade, opt => opt.MapFrom(u => u.Idade))
-                .ForMember(r => r.Ativo, opt => opt.MapFrom(u => u.Ativo))
+                .ForMember(dest => dest.Equipes, opt => opt.Ignore());
+
+            CreateMap<AtualizaJogadorDTO, Jogador>()
+                .ForMember(dest => dest.JogadorId, opt => opt.Ignore())
+                .ForMember(dest => dest.Cpf, opt => opt.Ignore())
                 .ForMember(dest => dest.Equipes, opt => opt.Ignore());
         }
     }

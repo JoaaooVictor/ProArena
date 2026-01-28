@@ -22,7 +22,7 @@ namespace ProArena.API.Controllers
         }
 
         [HttpGet]
-        [Route("busca-jogador-id")]
+        [Route("busca-jogador-{id}")]
         public async Task<IActionResult> BuscaJogadorPorId(int id)
         {
             var resultadoOperacao = await _jogadorService.BuscaJogadorPorId(id);

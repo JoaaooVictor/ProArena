@@ -29,10 +29,7 @@ namespace ProArena.Tests.Application
             };
 
             // Act
-            var response = await _client.PostAsJsonAsync(
-                "/api/auth/login-usuario",
-                dto
-            );
+            var response = await _client.PostAsJsonAsync("/api/auth/login-usuario", dto);
 
             // Assert
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);

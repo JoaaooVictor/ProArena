@@ -21,18 +21,19 @@ namespace ProArena.Application.Services
 
         public async Task<ResultadoOperacao> AtualizaJogador(AtualizaJogadorDTO atualizaJogadorDTO)
         {
-            var jogador = _mapper.Map<Jogador>(atualizaJogadorDTO);
+            var jogador = await _jogadorRepository.BuscaJogadorPorId(atualizaJogadorDTO.JogadorId);
 
             if (jogador is null)
             {
-                return ResultadoOperacao.Falhou("Nehum jogador carregado!", TipoErroOperacao.NaoEncontrado);
+                return ResultadoOperacao.Falhou("Jogador não encontrado", TipoErroOperacao.NaoEncontrado);
             }
 
             try
             {
+                _mapper.Map(atualizaJogadorDTO, jogador);
                 await _jogadorRepository.AtualizaJogador(jogador);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return ResultadoOperacao.Falhou("Erro ao atualizar jogador.", TipoErroOperacao.Inesperado);
             }
