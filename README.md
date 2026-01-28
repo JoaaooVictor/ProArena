@@ -1,8 +1,8 @@
 # 🏆 ProArena
 
-**ProArena** é uma plataforma para **gerenciamento de campeonatos e quadras de futevôlei**, permitindo organizar competições, equipes, jogadores e partidas de forma simples e escalável.
+**ProArena** é uma plataforma para **gerenciamento de campeonatos e quadras de futevôlei**, permitindo organizar competições, equipes, jogadores e partidas de forma simples.
 
-O projeto foi desenvolvido com foco em **boas práticas de arquitetura**, **separação de responsabilidades** e **evolução contínua**.
+O projeto foi desenvolvido com foco em **boas práticas de arquitetura**, **separação de responsabilidades** e **testes unitários**.
 
 ---
 
@@ -12,9 +12,10 @@ O projeto foi desenvolvido com foco em **boas práticas de arquitetura**, **sepa
 - ✅ Gerenciamento de equipes
 - ✅ Gerenciamento de jogadores
 - ✅ Organização de partidas
-- ✅ Autenticação de usuários
+- ✅ Autenticação de usuários (JWT)
 - ✅ Estrutura preparada para rankings e resultados
 - ✅ API REST documentada com Swagger
+- ✅ Testes Unitários com Moq e XUnit
 
 ---
 
@@ -48,7 +49,6 @@ O projeto segue uma arquitetura em camadas:
 
 ### Banco de Dados
 - SQL Server (produção)
-- InMemory / SQLite (testes)
 
 ---
 
