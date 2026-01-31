@@ -19,14 +19,14 @@ export default function Auth() {
       const response = await LoginUsuario({ email, senha })
 
       if (!response.data.erro) {
-        localStorage.setItem('token', response.data.objeto)
-        navigate('/dashboard')
+        localStorage.setItem('token', response.data.objeto);
+        navigate('/dashboard');
       }
 
     } catch (erro: any) {
-      toast.error(erro.response?.data?.mensagem ?? 'Erro inesperado')
+      toast.error(erro.response?.data?.mensagem ?? 'Erro inesperado');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -34,52 +34,45 @@ export default function Auth() {
     <>
       {loading && <Loading />}
 
-      <div className="login-container">
+      <div
+        className="login-full"
+        style={{ backgroundImage: `url(${bgLogin})` }}
+      >
+        <div className="login-overlay">
 
-        <div
-          className="login-left"
-          style={{ backgroundImage: `url(${bgLogin})` }}
-        >
-          <div className="login-left-content">
-            <h1>Eleve seu nível</h1>
-            <p>
-              Junte-se ao principal sistema para reservas de quadras e administração de torneios.
+          <div className="login-box">
+            <h2>Bem vindo</h2>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Senha</label>
+              <input
+                type="password"
+                value={senha}
+                onChange={e => setSenha(e.target.value)}
+              />
+            </div>
+
+            <button
+              className="btn-login"
+              onClick={Login}
+              disabled={loading}
+            >
+              {loading ? 'Entrando...' : 'Entrar'}
+            </button>
+
+            <p className="signup">
+              Não possui conta? <a href="/register">Registre-se</a>
             </p>
           </div>
-        </div>
-
-        <div className="login-right">
-          <h2>Bem vindo novamente</h2>
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Senha</label>
-            <input
-              type="password"
-              value={senha}
-              onChange={e => setSenha(e.target.value)}
-            />
-          </div>
-
-          <button
-            className="btn-login"
-            onClick={Login}
-            disabled={loading}
-          >
-            {loading ? 'Entrando...' : 'Entrar'}
-          </button>
-
-          <p className="signup">
-            Não possui conta? <a href="/register">Registre-se</a>
-          </p>
         </div>
       </div>
     </>

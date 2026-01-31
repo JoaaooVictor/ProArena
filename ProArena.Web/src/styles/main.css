@@ -11,3 +11,14 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  background: #0f172a;
+  color: white;
+}

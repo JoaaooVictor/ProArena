@@ -1,3 +1,4 @@
-export interface IUsuario{
-    
+export interface IUsuarioToken {
+  nome: string
+  email: string
 }
