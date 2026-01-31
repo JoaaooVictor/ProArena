@@ -1,0 +1,18 @@
+.navbar {
+    position: sticky;
+}
+
+.nav-item {
+    font-weight: bold;
+}
+
+.nav-item:hover {
+    color: rgb(7, 87, 179);
+    cursor: pointer;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}

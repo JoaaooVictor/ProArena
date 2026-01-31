@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Usuarios;
 using ProArena.Application.Enums;
 using ProArena.Application.Interfaces;

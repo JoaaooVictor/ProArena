@@ -1,0 +1,33 @@
+.fundo-imagem{
+    background-color: rgba(214, 214, 214, 0.418);
+}
+
+.imagem-dashboard {
+    width: 100%;
+}
+
+.texto-overlay {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.texto-overlay h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.texto-overlay p {
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(35, 88, 150);
+}
+
+.texto-overlay h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
