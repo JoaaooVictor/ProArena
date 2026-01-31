@@ -1,3 +1,3 @@
-export interface Usuario{
+export interface IUsuario{
     
 }

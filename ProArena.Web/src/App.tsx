@@ -1,22 +1,29 @@
 import LayoutAutenticacao from './layouts/LayoutAutenticacao'
 import LayoutPrincipal from './layouts/LayoutPrincipal'
 import Auth from './pages/Auth'
-import Dashboard from './pages/Dashboard'
+import Home from './pages/Home'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import PrivateRoute from './routes/PrivateRoute'
 
 export default function App() {
   return (
     <>
-      <ToastContainer 
-        position="top-right" 
-        autoClose={5000} 
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
       />
 
       <Routes>
-        <Route element={<LayoutPrincipal />}>
-          <Route path="/" element={<Dashboard />} />
+        <Route
+          element={
+            <PrivateRoute>
+              <LayoutPrincipal />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/" element={<Home />} />
         </Route>
 
         <Route element={<LayoutAutenticacao />}>

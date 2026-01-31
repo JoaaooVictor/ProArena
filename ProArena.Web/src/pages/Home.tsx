@@ -1,7 +1,7 @@
-import dashboardImg from '../assets/dashboard-futvolei.png';
-import '../styles/dashboard.css';
+import dashboardImg from '../assets/home-futvolei.png';
+import '../styles/home.css';
 
-export default function Dashboard() {
+export default function Home() {
   return (
     <div className="container-fluid pt-4 pb-5 fundo-imagem">
       <img 
