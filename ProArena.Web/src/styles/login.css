@@ -3,7 +3,6 @@
   height: 100vh;
 }
 
-/* Lado esquerdo */
 .login-left {
   flex: 1;
   background-size: cover;
@@ -22,7 +21,7 @@
   position: relative;
   color: white;
   padding: 60px;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .login-left-content h1 {
@@ -30,7 +29,6 @@
   margin-bottom: 10px;
 }
 
-/* Lado direito */
 .login-right {
   flex: 1;
   padding: 80px;

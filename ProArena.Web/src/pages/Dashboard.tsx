@@ -1,5 +1,5 @@
-import dashboardImg from '../assets/dashboard-futvolei.png'
-import '../styles/dashboard.css'
+import dashboardImg from '../assets/dashboard-futvolei.png';
+import '../styles/dashboard.css';
 
 export default function Dashboard() {
   return (

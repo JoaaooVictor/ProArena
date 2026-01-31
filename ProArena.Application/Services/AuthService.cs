@@ -60,9 +60,9 @@ namespace ProArena.Application.Services
 
         public async Task<ResultadoOperacao> Login(LoginUsuarioDTO loginUsuarioDTO)
         {
-            if (loginUsuarioDTO is null)
+            if (string.IsNullOrEmpty(loginUsuarioDTO.Email) || string.IsNullOrEmpty(loginUsuarioDTO.Senha))
             {
-                return ResultadoOperacao.Falhou("Usuário sem informações", TipoErroOperacao.NaoEncontrado);
+                return ResultadoOperacao.Falhou("Campo de login ou senha vazios", TipoErroOperacao.NaoEncontrado);
             }
 
             var usuarioValido = await ValidaCredenciais(loginUsuarioDTO);
@@ -74,7 +74,7 @@ namespace ProArena.Application.Services
 
             var token = await GeraTokenJwt(loginUsuarioDTO.Email);
 
-            return ResultadoOperacao.Concluido("Usuário autenticado com Sucesso!", TipoErroOperacao.Nenhum, token);
+            return ResultadoOperacao.Concluido("Autenticação bem sucedida", TipoErroOperacao.Nenhum, token);
         }
 
         public async Task<bool> ValidaCredenciais(LoginUsuarioDTO loginUsuarioDTO)

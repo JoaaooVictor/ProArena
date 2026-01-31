@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
 import '../styles/main.css'
+import Navbar from '../components/Navbar.js'
+import Footer from '../components/Footer.js'
 
 export default function MainLayout() {
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <main className="content">
         <Outlet />
       </main>
