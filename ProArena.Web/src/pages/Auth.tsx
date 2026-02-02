@@ -24,7 +24,7 @@ export default function Auth() {
       }
 
     } catch (erro: any) {
-      toast.error(erro.response?.data?.mensagem ?? 'Erro inesperado');
+      toast.error(erro.response?.data?.mensagem ?? 'Erro inesperado, contate o suporte');
     } finally {
       setLoading(false);
     }
@@ -70,7 +70,7 @@ export default function Auth() {
             </button>
 
             <p className="signup">
-              Não possui conta? <a href="/register">Registre-se</a>
+              Não possui conta? <a href="/registrar">Registre-se</a>
             </p>
           </div>
         </div>
