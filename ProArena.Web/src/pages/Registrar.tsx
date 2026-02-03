@@ -6,6 +6,7 @@ import { IRegistraUsuario } from '../interfaces/IUsuario';
 import { RegistraUsuario } from '../services/UsuarioService';
 import { AplicaMascaraCpf } from '../utils/Formatacao';
 import Loading from '../components/Loading';
+import { ValidaCampos } from '../utils/Validador';
 
 const Registrar = () => {
 
@@ -28,6 +29,12 @@ const Registrar = () => {
             cpf,
             email,
             senha
+        }
+
+        const erro = ValidaCampos(nome, cpf, email, senha, confirmaSenha)
+        if (erro) {
+            toast.error(erro)
+            return
         }
 
         try {
@@ -57,6 +64,10 @@ const Registrar = () => {
                     <div className='registrar-box'>
                         <form onSubmit={formSubmit}>
                             <h2>Registre-se</h2>
+                            <p className="registrar-subtitle">
+                                Crie sua conta para gerenciar arenas e campeonatos
+                            </p>
+
                             <div className='row'>
                                 <div className='col-9'>
                                     <label>Nome</label>
@@ -112,8 +123,8 @@ const Registrar = () => {
                                 </div>
                             </div>
                             <div className='row'>
-                                <div className='col-md-6 pt-4'>
-                                    <button type='submit' className='btn btn-outline-primary form-control'>Registrar</button>
+                                <div className='col-md-12 pt-4 text-center'>
+                                    <button type='submit' className='btn btn-registrar form-control'>Registrar</button>
                                 </div>
                             </div>
                         </form>

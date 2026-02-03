@@ -65,6 +65,13 @@ namespace ProArena.Application.Services
                 return ResultadoOperacao.Falhou("Campo de login ou senha vazios", TipoErroOperacao.NaoEncontrado);
             }
 
+            var usuario = await _usuarioRepository.BuscaUsuarioPorEmail(loginUsuarioDTO.Email);
+
+            if (usuario is null)
+            {
+                return ResultadoOperacao.Falhou("Nenhum usuário encontrado", TipoErroOperacao.NaoEncontrado);
+            }
+
             var usuarioValido = await ValidaCredenciais(loginUsuarioDTO);
 
             if (!usuarioValido)

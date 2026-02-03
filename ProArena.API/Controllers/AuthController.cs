@@ -29,7 +29,7 @@ namespace ProArena.API.Controllers
 
             if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoEncontrado)
             {
-                return BadRequest(resultadoOperacao);
+                return NotFound(resultadoOperacao);
             }
 
             return Ok(resultadoOperacao);

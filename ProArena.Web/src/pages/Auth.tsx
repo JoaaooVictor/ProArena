@@ -1,4 +1,4 @@
-import '../styles/login.css'
+import '../styles/auth.css'
 import bgLogin from '../assets/home-futvolei.png'
 import { LoginUsuario } from '../services/AuthService'
 import { useState } from 'react'

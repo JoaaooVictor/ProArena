@@ -7,7 +7,7 @@ export default function Navbar() {
             <div className="container">
 
                 <span className="navbar-brand">ProArena</span>
-
+                
                 <ul className="navbar-nav flex-row gap-3">
                     <li className="nav-item"><Link to="/arenas">Arenas</Link></li>
                     <li className="nav-item"><Link to="/campeonatos">Campeonatos</Link></li>
@@ -16,7 +16,7 @@ export default function Navbar() {
 
                 <div>
                     <button className="nav-item btn btn-outline-secondary me-2"><Link to="/login">Login</Link></button>
-                    <button className="nav-item btn btn-outline-primary"><Link to="/registrar">Registre-se</Link></button>
+                    <button className="nav-item btn btn-primary"><Link to="/registrar">Registre-se</Link></button>
                 </div>
             </div>
         </nav>
