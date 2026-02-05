@@ -59,6 +59,5 @@ namespace ProArena.API.Controllers
 
             return Ok(resultadoOperacao);
         }
-
     }
 }

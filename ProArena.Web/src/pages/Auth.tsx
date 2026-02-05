@@ -15,14 +15,11 @@ export default function Auth() {
   async function Login() {
     try {
       setLoading(true)
-
       const response = await LoginUsuario({ email, senha })
-
       if (!response.data.erro) {
         localStorage.setItem('token', response.data.objeto);
         navigate('/dashboard');
       }
-
     } catch (erro: any) {
       toast.error(erro.response?.data?.mensagem ?? 'Erro inesperado, contate o suporte');
     } finally {
