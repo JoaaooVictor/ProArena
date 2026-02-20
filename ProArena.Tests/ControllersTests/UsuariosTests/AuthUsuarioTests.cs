@@ -4,7 +4,7 @@ using ProArena.Application.DTOs.Usuarios;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace ProArena.Tests.Application
+namespace ProArena.Tests.ControllersTests.UsuariosTests
 {
     public class AuthUsuarioTests : IClassFixture<WebApplicationFactory<Program>>
     {
