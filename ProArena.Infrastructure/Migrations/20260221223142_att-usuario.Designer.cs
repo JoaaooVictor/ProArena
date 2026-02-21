@@ -12,8 +12,8 @@ using ProArena.Infrastructure.Data.Context;
 namespace ProArena.Infrastructure.Migrations
 {
     [DbContext(typeof(ProArenaContext))]
-    [Migration("20260123030013_CriandoUsuario")]
-    partial class CriandoUsuario
+    [Migration("20260221223142_att-usuario")]
+    partial class attusuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,21 @@ namespace ProArena.Infrastructure.Migrations
                     b.ToTable("EquipeJogador");
                 });
 
+            modelBuilder.Entity("EquipePartida", b =>
+                {
+                    b.Property<int>("EquipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PartidasPartidaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EquipeId", "PartidasPartidaId");
+
+                    b.HasIndex("PartidasPartidaId");
+
+                    b.ToTable("EquipePartida");
+                });
+
             modelBuilder.Entity("ProArena.Domain.Entities.Campeonato", b =>
                 {
                     b.Property<int>("CampeonatoId")
@@ -48,13 +63,27 @@ namespace ProArena.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampeonatoId"));
 
-                    b.Property<DateTime>("DataFim")
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataFim")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataInicio")
+                    b.Property<DateTime?>("DataFimInscricao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataInicioInscricao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -80,9 +109,33 @@ namespace ProArena.Infrastructure.Migrations
 
                     b.HasKey("EquipeId");
 
+                    b.ToTable("Equipes");
+                });
+
+            modelBuilder.Entity("ProArena.Domain.Entities.Inscricao", b =>
+                {
+                    b.Property<int>("InscricaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InscricaoId"));
+
+                    b.Property<int>("CampeonatoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataInscricao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EquipeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InscricaoId");
+
                     b.HasIndex("CampeonatoId");
 
-                    b.ToTable("Equipes");
+                    b.HasIndex("EquipeId");
+
+                    b.ToTable("Inscricao");
                 });
 
             modelBuilder.Entity("ProArena.Domain.Entities.Jogador", b =>
@@ -92,6 +145,9 @@ namespace ProArena.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JogadorId"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -119,33 +175,18 @@ namespace ProArena.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartidaId"));
 
-                    b.Property<int?>("CampeonatoId")
+                    b.Property<int>("CampeonatoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataHora")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EquipeAId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EquipeBId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResultadoEquipeA")
-                        .HasMaxLength(3)
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResultadoEquipeB")
-                        .HasMaxLength(3)
+                    b.Property<int>("EquipeId")
                         .HasColumnType("int");
 
                     b.HasKey("PartidaId");
 
                     b.HasIndex("CampeonatoId");
-
-                    b.HasIndex("EquipeAId");
-
-                    b.HasIndex("EquipeBId");
 
                     b.ToTable("Partidas");
                 });
@@ -169,8 +210,11 @@ namespace ProArena.Infrastructure.Migrations
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TipoUsuario")
+                        .HasColumnType("int");
 
                     b.HasKey("UsuarioId");
 
@@ -192,43 +236,61 @@ namespace ProArena.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProArena.Domain.Entities.Equipe", b =>
+            modelBuilder.Entity("EquipePartida", b =>
+                {
+                    b.HasOne("ProArena.Domain.Entities.Equipe", null)
+                        .WithMany()
+                        .HasForeignKey("EquipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProArena.Domain.Entities.Partida", null)
+                        .WithMany()
+                        .HasForeignKey("PartidasPartidaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProArena.Domain.Entities.Inscricao", b =>
                 {
                     b.HasOne("ProArena.Domain.Entities.Campeonato", "Campeonato")
-                        .WithMany("Equipes")
-                        .HasForeignKey("CampeonatoId");
+                        .WithMany("Inscricoes")
+                        .HasForeignKey("CampeonatoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProArena.Domain.Entities.Equipe", "Equipe")
+                        .WithMany("Inscricao")
+                        .HasForeignKey("EquipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Campeonato");
+
+                    b.Navigation("Equipe");
                 });
 
             modelBuilder.Entity("ProArena.Domain.Entities.Partida", b =>
                 {
-                    b.HasOne("ProArena.Domain.Entities.Campeonato", null)
+                    b.HasOne("ProArena.Domain.Entities.Campeonato", "Campeonato")
                         .WithMany("Partidas")
-                        .HasForeignKey("CampeonatoId");
-
-                    b.HasOne("ProArena.Domain.Entities.Equipe", "EquipeA")
-                        .WithMany()
-                        .HasForeignKey("EquipeAId")
+                        .HasForeignKey("CampeonatoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ProArena.Domain.Entities.Equipe", "EquipeB")
-                        .WithMany()
-                        .HasForeignKey("EquipeBId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("EquipeA");
-
-                    b.Navigation("EquipeB");
+                    b.Navigation("Campeonato");
                 });
 
             modelBuilder.Entity("ProArena.Domain.Entities.Campeonato", b =>
                 {
-                    b.Navigation("Equipes");
+                    b.Navigation("Inscricoes");
 
                     b.Navigation("Partidas");
+                });
+
+            modelBuilder.Entity("ProArena.Domain.Entities.Equipe", b =>
+                {
+                    b.Navigation("Inscricao");
                 });
 #pragma warning restore 612, 618
         }

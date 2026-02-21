@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
@@ -27,7 +27,7 @@ namespace ProArena.API.Controllers
         {
             var resultadoOperacao = await _jogadorService.BuscaJogadorPorId(id);
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.Inesperado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
             {
                 return StatusCode(500);
             }
@@ -46,7 +46,7 @@ namespace ProArena.API.Controllers
 
             var resultadoOperacao = await _jogadorService.RegistraJogador(registraJogadorDTO);
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.Inesperado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
             {
                 return StatusCode(500);
             }
@@ -65,7 +65,7 @@ namespace ProArena.API.Controllers
 
             var resultadoOperacao = await _jogadorService.AtualizaJogador(atualizaJogadorDTO);
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.Inesperado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
             {
                 return StatusCode(500);
             }

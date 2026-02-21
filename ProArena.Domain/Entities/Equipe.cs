@@ -18,7 +18,8 @@
         }
 
         public int? CampeonatoId { get; set; }
-        public virtual Campeonato? Campeonato { get; set; }
+        public virtual List<Inscricao> Inscricao { get; set; } = null!;
         public virtual List<Jogador> Jogadores { get; set; } = null!;
+        public virtual List<Partida> Partidas { get; set; } = null!;
     }
 }

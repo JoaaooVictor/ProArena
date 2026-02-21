@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Usuarios;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
@@ -31,7 +31,7 @@ namespace ProArena.API.Controllers
 
             var resultadoOperacao = await _usuarioService.RegistraUsuario(registraUsuarioDTO);
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.Inesperado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
             {
                 return StatusCode(500);
             }

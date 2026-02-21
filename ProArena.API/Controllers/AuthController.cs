@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Usuarios;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 
 namespace ProArena.API.Controllers
@@ -22,12 +22,12 @@ namespace ProArena.API.Controllers
         {
             var resultadoOperacao = await _authService.Login(loginUsuarioDTO);
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoAutorizado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.NaoAutorizado)
             {
                 return Unauthorized(resultadoOperacao);
             }
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacao.NaoEncontrado)
+            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {
                 return NotFound(resultadoOperacao);
             }

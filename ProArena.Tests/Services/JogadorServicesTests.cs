@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Moq;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Services;
 using ProArena.Domain.Entities;
@@ -42,7 +42,7 @@ namespace ProArena.Tests.Services
 
             // Assert
             Assert.False(response.Erro);
-            Assert.Equal(TipoErroOperacao.Nenhum, response.TipoErro);
+            Assert.Equal(TipoErroOperacaoEnum.Nenhum, response.TipoErro);
             Assert.NotNull(response.Objeto);
         }
 
@@ -59,7 +59,7 @@ namespace ProArena.Tests.Services
 
             // Assert
             Assert.False(response.Erro);
-            Assert.Equal(TipoErroOperacao.Nenhum, response.TipoErro);
+            Assert.Equal(TipoErroOperacaoEnum.Nenhum, response.TipoErro);
             Assert.Null(response.Objeto);
         }
     }

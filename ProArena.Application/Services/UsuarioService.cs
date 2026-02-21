@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ProArena.Application.DTOs.Usuarios;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
@@ -41,10 +41,10 @@ namespace ProArena.Application.Services
             }
             catch (Exception ex)
             {
-                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacao.Inesperado);
+                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacaoEnum.Inesperado);
             }
 
-            return ResultadoOperacao.Concluido("Usuário registrado com sucesso!", TipoErroOperacao.Nenhum);
+            return ResultadoOperacao.Concluido("Usuário registrado com sucesso!", TipoErroOperacaoEnum.Nenhum);
         }
     }
 }

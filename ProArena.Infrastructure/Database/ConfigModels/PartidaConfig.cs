@@ -18,30 +18,10 @@ namespace ProArena.Infrastructure.Database.ConfigModels
                 .Property(e => e.PartidaId)
                 .ValueGeneratedOnAdd();
 
-            builder
-                .Property(p => p.ResultadoEquipeB)
-                .HasMaxLength(3);
-
-            builder
-                .Property(p => p.ResultadoEquipeA)
-                .HasMaxLength(3);
-
             builder.HasOne(p => p.Campeonato)
                .WithMany(c => c.Partidas)
                .HasForeignKey(p => p.CampeonatoId)
                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasOne(p => p.EquipeA)
-                .WithMany()
-                .HasForeignKey(p => p.EquipeAId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasOne(p => p.EquipeB)
-                .WithMany()
-                .HasForeignKey(p => p.EquipeBId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using ProArena.Application.Enums;
+﻿using ProArena.Domain.Enums;
 
 namespace ProArena.Application.Utils
 {
@@ -7,9 +7,9 @@ namespace ProArena.Application.Utils
         public bool Erro { get; set; } = false;
         public string Mensagem { get; set; } = string.Empty;
         public object? Objeto { get; set; }
-        public TipoErroOperacao TipoErro { get; set; }
+        public TipoErroOperacaoEnum TipoErro { get; set; }
 
-        public ResultadoOperacao(bool erro, string mensagem, TipoErroOperacao tipoErro,  object? obj = null)
+        public ResultadoOperacao(bool erro, string mensagem, TipoErroOperacaoEnum tipoErro,  object? obj = null)
         {
             Erro = erro;
             Mensagem = mensagem;
@@ -17,12 +17,12 @@ namespace ProArena.Application.Utils
             Objeto = obj;
         }
 
-        public static ResultadoOperacao Concluido(string mensagem, TipoErroOperacao tipoErro, object? obj = null)
+        public static ResultadoOperacao Concluido(string mensagem, TipoErroOperacaoEnum tipoErro, object? obj = null)
         {
             return new ResultadoOperacao(false, mensagem, tipoErro, obj);
         }
 
-        public static ResultadoOperacao Falhou(string mensagem, TipoErroOperacao tipoErro)
+        public static ResultadoOperacao Falhou(string mensagem, TipoErroOperacaoEnum tipoErro)
         {
             return new ResultadoOperacao(true, mensagem, tipoErro);
         }

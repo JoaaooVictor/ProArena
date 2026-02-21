@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ProArena.Application.DTOs;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
@@ -25,7 +25,7 @@ namespace ProArena.Application.Services
 
             if (jogador is null)
             {
-                return ResultadoOperacao.Falhou("Jogador não encontrado", TipoErroOperacao.NaoEncontrado);
+                return ResultadoOperacao.Falhou("Jogador não encontrado", TipoErroOperacaoEnum.NaoEncontrado);
             }
 
             try
@@ -35,10 +35,10 @@ namespace ProArena.Application.Services
             }
             catch (Exception)
             {
-                return ResultadoOperacao.Falhou("Erro ao atualizar jogador.", TipoErroOperacao.Inesperado);
+                return ResultadoOperacao.Falhou("Erro ao atualizar jogador.", TipoErroOperacaoEnum.Inesperado);
             }
 
-            return ResultadoOperacao.Concluido("Jogador atualizado com sucesso!", TipoErroOperacao.Nenhum);
+            return ResultadoOperacao.Concluido("Jogador atualizado com sucesso!", TipoErroOperacaoEnum.Nenhum);
         }
 
         public async Task<ResultadoOperacao> BuscaJogadorPorId(int id)
@@ -47,10 +47,10 @@ namespace ProArena.Application.Services
 
             if (jogador is null)
             {
-                return ResultadoOperacao.Concluido("Jogador não encontrado.", TipoErroOperacao.Nenhum);
+                return ResultadoOperacao.Concluido("Jogador não encontrado.", TipoErroOperacaoEnum.Nenhum);
             }
 
-            return ResultadoOperacao.Concluido("Jogador encontrado com sucesso.", TipoErroOperacao.Nenhum, jogador);
+            return ResultadoOperacao.Concluido("Jogador encontrado com sucesso.", TipoErroOperacaoEnum.Nenhum, jogador);
         }
 
         public async Task<ResultadoOperacao> RegistraJogador(RegistraJogadorDTO registraJogadorDTO)
@@ -62,10 +62,10 @@ namespace ProArena.Application.Services
             }
             catch (Exception ex)
             {
-                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacao.Inesperado);
+                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacaoEnum.Inesperado);
             }
 
-            return ResultadoOperacao.Concluido("Jogador adicionado com sucesso.", TipoErroOperacao.Nenhum);
+            return ResultadoOperacao.Concluido("Jogador adicionado com sucesso.", TipoErroOperacaoEnum.Nenhum);
         }
     }
 }

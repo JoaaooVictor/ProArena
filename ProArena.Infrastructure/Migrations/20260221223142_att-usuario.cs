@@ -5,25 +5,25 @@
 namespace ProArena.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AtualizandoJogador : Migration
+    public partial class attusuario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Ativo",
-                table: "Jogadores",
-                type: "bit",
+            migrationBuilder.AddColumn<int>(
+                name: "TipoUsuario",
+                table: "Usuarios",
+                type: "int",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Ativo",
-                table: "Jogadores");
+                name: "TipoUsuario",
+                table: "Usuarios");
         }
     }
 }

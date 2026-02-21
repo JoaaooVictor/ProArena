@@ -1,6 +1,6 @@
-﻿namespace ProArena.Application.Enums
+﻿namespace ProArena.Domain.Enums
 {
-    public enum TipoErroOperacao
+    public enum TipoErroOperacaoEnum
     {
         Nenhum = 0,
         ErroAoValidar = 1,

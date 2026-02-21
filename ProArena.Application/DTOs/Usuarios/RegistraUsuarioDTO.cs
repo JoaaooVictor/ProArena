@@ -1,4 +1,6 @@
-﻿namespace ProArena.Application.DTOs.Usuarios
+﻿using ProArena.Domain.Enums;
+
+namespace ProArena.Application.DTOs.Usuarios
 {
     public class RegistraUsuarioDTO
     {
@@ -6,5 +8,6 @@
         public string Cpf { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
+        public TipoUsuarioEnum TipoUsuario { get; set; }
     }
 }

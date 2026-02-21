@@ -9,7 +9,8 @@
         public DateTime? DataFimInscricao { get; set; }
         public DateTime? DataFim { get; set; }
         public DateTime? DataInicio { get; set; }
-        public virtual List<Equipe> Equipes { get; set; } = new();
+        public bool Ativo { get; set; }
+        public virtual List<Inscricao> Inscricoes { get; set; } = new();
         public virtual List<Partida> Partidas { get; set; } = new();
     }
 }

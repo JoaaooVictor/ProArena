@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PrivateRoute from './routes/PrivateRoute'
 import Registrar from './pages/Registrar'
+import Sobre from './pages/Sobre'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route element={<LayoutPublico />}>
           <Route path="/" element={<Home />} />
           <Route path="/registrar" element={<Registrar />} />
+          <Route path="/sobre" element={<Sobre />} />
         </Route>
         <Route path="/login" element={<Auth />} />
 

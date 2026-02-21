@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProArena.Application.DTOs.Usuarios;
-using ProArena.Application.Enums;
+using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Interfaces;
@@ -62,26 +62,26 @@ namespace ProArena.Application.Services
         {
             if (string.IsNullOrEmpty(loginUsuarioDTO.Email) || string.IsNullOrEmpty(loginUsuarioDTO.Senha))
             {
-                return ResultadoOperacao.Falhou("Campo de login ou senha vazios", TipoErroOperacao.NaoEncontrado);
+                return ResultadoOperacao.Falhou("Campo de login ou senha vazios", TipoErroOperacaoEnum.NaoEncontrado);
             }
 
             var usuario = await _usuarioRepository.BuscaUsuarioPorEmail(loginUsuarioDTO.Email);
 
             if (usuario is null)
             {
-                return ResultadoOperacao.Falhou("Nenhum usuário encontrado", TipoErroOperacao.NaoEncontrado);
+                return ResultadoOperacao.Falhou("Nenhum usuário encontrado", TipoErroOperacaoEnum.NaoEncontrado);
             }
 
             var usuarioValido = await ValidaCredenciais(loginUsuarioDTO);
 
             if (!usuarioValido)
             {
-                return ResultadoOperacao.Falhou("Email ou Senha Incorretos", TipoErroOperacao.NaoAutorizado);
+                return ResultadoOperacao.Falhou("Email ou Senha Incorretos", TipoErroOperacaoEnum.NaoAutorizado);
             }
 
             var token = await GeraTokenJwt(loginUsuarioDTO.Email);
 
-            return ResultadoOperacao.Concluido("Autenticação bem sucedida", TipoErroOperacao.Nenhum, token);
+            return ResultadoOperacao.Concluido("Autenticação bem sucedida", TipoErroOperacaoEnum.Nenhum, token);
         }
 
         public async Task<bool> ValidaCredenciais(LoginUsuarioDTO loginUsuarioDTO)
