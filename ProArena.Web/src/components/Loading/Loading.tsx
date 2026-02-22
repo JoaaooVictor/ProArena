@@ -1,4 +1,4 @@
-import '../styles/loading.css';
+import '../Loading/loading.css';
 
 export default function Loading() {
   return (

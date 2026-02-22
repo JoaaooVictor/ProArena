@@ -4,7 +4,7 @@ import { LoginUsuario } from '../services/AuthService'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import Loading from '../components/Loading'
+import Loading from '../components/Loading/Loading'
 
 export default function Auth() {
   const navigate = useNavigate()

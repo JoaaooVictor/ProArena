@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { IRegistraUsuario } from '../interfaces/IUsuario';
 import { RegistraUsuario } from '../services/UsuarioService';
 import { AplicaMascaraCpf } from '../utils/Formatacao';
-import Loading from '../components/Loading';
+import Loading from '../components/Loading/Loading';
 import { ValidaCampos } from '../utils/Validador';
 
 const Registrar = () => {

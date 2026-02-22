@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Sobre = () => {
   return (
     <main className="sobre-page">
-      {/* HERO */}
       <section className="sobre-hero">
         <div className="container sobre-hero-content">
           <div className="sobre-hero-text">
