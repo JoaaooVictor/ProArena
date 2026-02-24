@@ -22,7 +22,19 @@ namespace ProArena.Application.Services
         {
             try
             {
-                var campeonato = _mapper.Map<Campeonato>(registraCampeonatoDTO);
+                var campeonato = new Campeonato();
+
+                if(registraCampeonatoDTO.Equipes is not null)
+                {
+                    
+                    foreach (var equipe in registraCampeonatoDTO.Equipes)
+                    {
+                        var equipeEntity = _mapper.Map<Equipe>(equipe);
+                        campeonato.Inscricoes.Add(new Inscricao { Equipe = equipeEntity });
+					}
+
+					campeonato = _mapper.Map<Campeonato>(registraCampeonatoDTO);
+                }
 
                 if (campeonato is null)
                 {

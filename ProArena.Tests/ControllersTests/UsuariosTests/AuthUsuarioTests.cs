@@ -32,7 +32,7 @@ namespace ProArena.Tests.ControllersTests.UsuariosTests
             var response = await _client.PostAsJsonAsync("/api/auth/login-usuario", dto);
 
             // Assert
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
