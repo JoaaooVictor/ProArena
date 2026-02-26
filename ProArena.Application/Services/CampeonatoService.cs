@@ -26,7 +26,6 @@ namespace ProArena.Application.Services
 
                 if(registraCampeonatoDTO.Equipes is not null)
                 {
-                    
                     foreach (var equipe in registraCampeonatoDTO.Equipes)
                     {
                         var equipeEntity = _mapper.Map<Equipe>(equipe);
