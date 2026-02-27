@@ -59,13 +59,5 @@ namespace ProArena.API.Controllers
 
             return Ok(resultadoOperacao);
         }
-
-        [HttpPost]
-        [Route("adiciona-equipe-id")]
-        public async Task<IActionResult> AdicionaEquipeCampeonato()
-        {
-
-            return Ok();
-        }
     }
 }
