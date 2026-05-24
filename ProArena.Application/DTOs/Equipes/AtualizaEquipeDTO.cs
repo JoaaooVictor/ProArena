@@ -1,9 +1,9 @@
-﻿namespace ProArena.Application.DTOs
+namespace ProArena.Application.DTOs.Equipes
 {
-    public class RegistraEquipeDTO
+    public class AtualizaEquipeDTO
     {
+        public int EquipeId { get; set; }
         public string Nome { get; set; } = string.Empty;
         public List<int> JogadorIds { get; set; } = new();
-        public int CampeonatoId { get; set; }
     }
 }

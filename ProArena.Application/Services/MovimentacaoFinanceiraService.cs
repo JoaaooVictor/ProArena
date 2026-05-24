@@ -1,5 +1,6 @@
 using AutoMapper;
 using ProArena.Application.DTOs;
+using ProArena.Application.DTOs.Movimentacao;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;

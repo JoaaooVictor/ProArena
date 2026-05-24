@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using ProArena.Application.DTOs;
 using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 using ProArena.Domain.Interfaces;
+using ProArena.Application.DTOs.Campeonatos;
 
 namespace ProArena.Application.Services
 {

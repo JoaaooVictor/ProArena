@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProArena.Application.DTOs;
+using ProArena.Application.DTOs.Movimentacao;
 using ProArena.Application.Interfaces;
 using ProArena.Domain.Enums;
 

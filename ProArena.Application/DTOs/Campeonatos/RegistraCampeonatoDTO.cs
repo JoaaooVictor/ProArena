@@ -1,4 +1,6 @@
-﻿namespace ProArena.Application.DTOs
+﻿using ProArena.Application.DTOs.Equipes;
+
+namespace ProArena.Application.DTOs.Campeonatos
 {
     public class RegistraCampeonatoDTO
     {

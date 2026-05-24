@@ -1,4 +1,4 @@
-﻿using ProArena.Application.DTOs;
+﻿using ProArena.Application.DTOs.Jogadores;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 

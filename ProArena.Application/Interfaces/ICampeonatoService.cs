@@ -1,4 +1,4 @@
-﻿using ProArena.Application.DTOs;
+﻿using ProArena.Application.DTOs.Campeonatos;
 using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 

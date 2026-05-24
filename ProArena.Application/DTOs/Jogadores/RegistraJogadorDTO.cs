@@ -1,4 +1,4 @@
-﻿namespace ProArena.Application.DTOs
+﻿namespace ProArena.Application.DTOs.Jogadores
 {
     public class RegistraJogadorDTO
     {

@@ -1,9 +1,10 @@
 using ProArena.Domain.Enums;
 
-namespace ProArena.Application.DTOs
+namespace ProArena.Application.DTOs.Movimentacao
 {
-    public class RegistraMovimentacaoFinanceiraDTO
+    public class AtualizaMovimentacaoFinanceiraDTO
     {
+        public int MovimentacaoFinanceiraId { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public decimal Valor { get; set; }
         public DateTime Data { get; set; }

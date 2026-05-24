@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
-using ProArena.Application.DTOs;
+using ProArena.Application.DTOs.Campeonatos;
+using ProArena.Application.DTOs.Equipes;
+using ProArena.Application.DTOs.Jogadores;
+using ProArena.Application.DTOs.Movimentacao;
 using ProArena.Application.DTOs.Usuarios;
 using ProArena.Domain.Entities;
 
