@@ -7,5 +7,6 @@ namespace ProArena.Domain.Interfaces
         Task AtualizaJogador(Jogador jogador);
         Task RegistraJogador(Jogador jogador);
         Task<Jogador?> BuscaJogadorPorId(int id);
+        Task<List<Jogador>> BuscaTodosJogadores();
     }
 }

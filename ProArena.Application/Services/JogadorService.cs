@@ -47,10 +47,23 @@ namespace ProArena.Application.Services
 
             if (jogador is null)
             {
-                return ResultadoOperacao.Concluido("Jogador não encontrado.", TipoErroOperacaoEnum.Nenhum);
+                return ResultadoOperacao.Falhou("Jogador não encontrado.", TipoErroOperacaoEnum.NaoEncontrado);
             }
 
             return ResultadoOperacao.Concluido("Jogador encontrado com sucesso.", TipoErroOperacaoEnum.Nenhum, jogador);
+        }
+
+        public async Task<ResultadoOperacao> BuscaTodosJogadores()
+        {
+            try
+            {
+                var jogadores = await _jogadorRepository.BuscaTodosJogadores();
+                return ResultadoOperacao.Concluido("Jogadores encontrados com sucesso.", TipoErroOperacaoEnum.Nenhum, jogadores);
+            }
+            catch (Exception ex)
+            {
+                return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacaoEnum.Inesperado);
+            }
         }
 
         public async Task<ResultadoOperacao> RegistraJogador(RegistraJogadorDTO registraJogadorDTO)

@@ -21,7 +21,12 @@ namespace ProArena.Application.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<string> GeraHashSenha(string senha)
+		public Task FicarPelado()
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<string> GeraHashSenha(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
             {

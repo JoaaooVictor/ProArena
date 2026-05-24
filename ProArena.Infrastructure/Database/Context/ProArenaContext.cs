@@ -18,5 +18,6 @@ namespace ProArena.Infrastructure.Data.Context
         public DbSet<Partida> Partidas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<MovimentacaoFinanceira> MovimentacoesFinanceiras { get; set; }
     }
 }

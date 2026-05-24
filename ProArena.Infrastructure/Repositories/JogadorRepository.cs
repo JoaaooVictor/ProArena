@@ -30,5 +30,10 @@ namespace ProArena.Infrastructure.Repositories
         {
             return await _context.Jogadores.Where(j => j.JogadorId == id).FirstOrDefaultAsync();
         }
+
+        public async Task<List<Jogador>> BuscaTodosJogadores()
+        {
+            return await _context.Jogadores.OrderBy(j => j.Nome).ToListAsync();
+        }
     }
 }

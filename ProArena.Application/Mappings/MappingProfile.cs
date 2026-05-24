@@ -10,9 +10,14 @@ namespace ProArena.Application.Mappings
         public MappingProfile()
         {
             CreateMap<RegistraCampeonatoDTO, Campeonato>()
-                .ForMember(r => r.Descricao, opt => opt.MapFrom(c => c.Descricao))
-                .ForMember(r => r.DataInicio, opt => opt.MapFrom(c => c.DataInicio))
-                .ForMember(r => r.DataFim, opt => opt.MapFrom(c => c.DataFim))
+                .ForMember(dest => dest.Partidas, opt => opt.Ignore())
+                .ForMember(dest => dest.Inscricoes, opt => opt.Ignore())
+                .ForMember(dest => dest.CampeonatoId, opt => opt.Ignore())
+                .ForMember(dest => dest.Ativo, opt => opt.Ignore());
+
+            CreateMap<RegistraEquipeDTO, Equipe>()
+                .ForMember(dest => dest.EquipeId, opt => opt.Ignore())
+                .ForMember(dest => dest.Jogadores, opt => opt.Ignore())
                 .ForMember(dest => dest.Partidas, opt => opt.Ignore());
 
             CreateMap<RegistraUsuarioDTO, Usuario>()
@@ -25,12 +30,20 @@ namespace ProArena.Application.Mappings
                 .ForMember(r => r.Nome, opt => opt.MapFrom(u => u.Nome))
                 .ForMember(r => r.Cpf, opt => opt.MapFrom(u => u.Cpf))
                 .ForMember(r => r.Idade, opt => opt.MapFrom(u => u.Idade))
-                .ForMember(dest => dest.Equipes, opt => opt.Ignore());
+                .ForMember(dest => dest.Equipes, opt => opt.Ignore())
+                .ForMember(dest => dest.Ativo, opt => opt.MapFrom(_ => true));
 
             CreateMap<AtualizaJogadorDTO, Jogador>()
                 .ForMember(dest => dest.JogadorId, opt => opt.Ignore())
                 .ForMember(dest => dest.Cpf, opt => opt.Ignore())
                 .ForMember(dest => dest.Equipes, opt => opt.Ignore());
+
+            CreateMap<RegistraMovimentacaoFinanceiraDTO, MovimentacaoFinanceira>()
+                .ForMember(dest => dest.MovimentacaoFinanceiraId, opt => opt.Ignore())
+                .ForMember(dest => dest.Campeonato, opt => opt.Ignore());
+
+            CreateMap<AtualizaMovimentacaoFinanceiraDTO, MovimentacaoFinanceira>()
+                .ForMember(dest => dest.Campeonato, opt => opt.Ignore());
         }
     }
 }

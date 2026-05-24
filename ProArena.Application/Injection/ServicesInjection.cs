@@ -13,6 +13,7 @@ namespace ProArena.Application.Injection
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJogadorService, JogadorService>();
+            services.AddScoped<IMovimentacaoFinanceiraService, MovimentacaoFinanceiraService>();
 
             return services;
         }

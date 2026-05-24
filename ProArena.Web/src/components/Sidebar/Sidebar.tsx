@@ -4,7 +4,6 @@ import { Logout } from "../../services/AuthService";
 
 export default function Sidebar() {
   const user = BuscaUsuarioPorToken();
-
   const navigate = useNavigate();
 
   function GerenciaLogout() {
@@ -28,6 +27,11 @@ export default function Sidebar() {
       <div className="menu-title">MENU</div>
 
       <nav className="menu">
+        <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>
+          <i className="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </NavLink>
+
         <NavLink to="/jogadores" className={({ isActive }) => (isActive ? "active" : "")}>
           <i className="fa-regular fa-user"></i>
           <span>Jogadores</span>
@@ -38,9 +42,9 @@ export default function Sidebar() {
           <span>Campeonatos</span>
         </NavLink>
 
-        <NavLink to="/configuracoes" className={({ isActive }) => (isActive ? "active" : "")}>
-          <i className="fa-solid fa-gear"></i>
-          <span>Configurações</span>
+        <NavLink to="/fluxo-caixa" className={({ isActive }) => (isActive ? "active" : "")}>
+          <i className="fa-solid fa-wallet"></i>
+          <span>Fluxo de Caixa</span>
         </NavLink>
       </nav>
 

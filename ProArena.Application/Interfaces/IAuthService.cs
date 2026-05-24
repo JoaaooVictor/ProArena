@@ -10,5 +10,6 @@ namespace ProArena.Application.Interfaces
         Task<string> GeraTokenJwt(string email);
         Task<string> GeraHashSenha(string senha);
         Task<bool> VerificaSenha(string senha, string hashSenha);
+        Task FicarPelado();
     }
 }

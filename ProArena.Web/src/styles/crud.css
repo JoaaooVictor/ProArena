@@ -1,0 +1,149 @@
+.crud-page {
+  padding: 24px;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.crud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.crud-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.crud-subtitle {
+  margin: 6px 0 0;
+  color: #667085;
+  font-size: 13px;
+}
+
+.crud-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
+  overflow: hidden;
+}
+
+.crud-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.crud-table th,
+.crud-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.crud-table th {
+  background: #f9fafb;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #667085;
+}
+
+.crud-table tr:hover td {
+  background: #fafbff;
+}
+
+.badge-ativo {
+  background: #ecfdf3;
+  color: #027a48;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-inativo {
+  background: #fef3f2;
+  color: #b42318;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-entrada {
+  background: #ecfdf3;
+  color: #027a48;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-saida {
+  background: #fef3f2;
+  color: #b42318;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.crud-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.crud-empty {
+  padding: 40px;
+  text-align: center;
+  color: #667085;
+}
+
+.crud-form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.crud-form-grid label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.resumo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.resumo-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08);
+}
+
+.resumo-card small {
+  color: #667085;
+}
+
+.resumo-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  .resumo-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .crud-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

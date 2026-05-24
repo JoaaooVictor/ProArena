@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
-using ProArena.Domain.Enums;
 using ProArena.Application.Interfaces;
+using ProArena.Domain.Enums;
 
 namespace ProArena.API.Controllers
 {
-
     [Route("api/jogador")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -21,22 +19,21 @@ namespace ProArena.API.Controllers
             _jogadorService = jogadorService;
         }
 
-        [HttpGet]
-        [Route("busca-jogador-{id}")]
-        public async Task<IActionResult> BuscaJogadorPorId(int id)
+        [HttpGet("busca-todos-jogadores")]
+        public async Task<IActionResult> BuscaTodosJogadores()
         {
-            var resultadoOperacao = await _jogadorService.BuscaJogadorPorId(id);
-
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
-            {
-                return StatusCode(500);
-            }
-
-            return Ok(resultadoOperacao);
+            var resultado = await _jogadorService.BuscaTodosJogadores();
+            return TrataResultado(resultado);
         }
 
-        [HttpPost]
-        [Route("registra-jogador")]
+        [HttpGet("busca-jogador-{id}")]
+        public async Task<IActionResult> BuscaJogadorPorId(int id)
+        {
+            var resultado = await _jogadorService.BuscaJogadorPorId(id);
+            return TrataResultado(resultado);
+        }
+
+        [HttpPost("registra-jogador")]
         public async Task<IActionResult> RegistraJogador(RegistraJogadorDTO registraJogadorDTO)
         {
             if (registraJogadorDTO is null)
@@ -44,18 +41,11 @@ namespace ProArena.API.Controllers
                 return BadRequest();
             }
 
-            var resultadoOperacao = await _jogadorService.RegistraJogador(registraJogadorDTO);
-
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
-            {
-                return StatusCode(500);
-            }
-
-            return Created();
+            var resultado = await _jogadorService.RegistraJogador(registraJogadorDTO);
+            return TrataResultado(resultado, created: true);
         }
 
-        [HttpPut]
-        [Route("atualiza-jogador")]
+        [HttpPut("atualiza-jogador")]
         public async Task<IActionResult> AtualizaJogador(AtualizaJogadorDTO atualizaJogadorDTO)
         {
             if (atualizaJogadorDTO is null)
@@ -63,14 +53,28 @@ namespace ProArena.API.Controllers
                 return BadRequest();
             }
 
-            var resultadoOperacao = await _jogadorService.AtualizaJogador(atualizaJogadorDTO);
+            var resultado = await _jogadorService.AtualizaJogador(atualizaJogadorDTO);
+            return TrataResultado(resultado);
+        }
 
-            if (resultadoOperacao.Erro && resultadoOperacao.TipoErro == TipoErroOperacaoEnum.Inesperado)
+        private IActionResult TrataResultado(Application.Utils.ResultadoOperacao resultado, bool created = false)
+        {
+            if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {
-                return StatusCode(500);
+                return NotFound(resultado);
             }
 
-            return Created();
+            if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.Inesperado)
+            {
+                return StatusCode(500, resultado);
+            }
+
+            if (resultado.Erro)
+            {
+                return BadRequest(resultado);
+            }
+
+            return created ? Created(string.Empty, resultado) : Ok(resultado);
         }
     }
 }

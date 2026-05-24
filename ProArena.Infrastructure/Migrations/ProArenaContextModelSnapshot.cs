@@ -164,6 +164,43 @@ namespace ProArena.Infrastructure.Migrations
                     b.ToTable("Jogadores");
                 });
 
+            modelBuilder.Entity("ProArena.Domain.Entities.MovimentacaoFinanceira", b =>
+                {
+                    b.Property<int>("MovimentacaoFinanceiraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovimentacaoFinanceiraId"));
+
+                    b.Property<int?>("CampeonatoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Categoria")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("MovimentacaoFinanceiraId");
+
+                    b.HasIndex("CampeonatoId");
+
+                    b.ToTable("MovimentacoesFinanceiras", (string)null);
+                });
+
             modelBuilder.Entity("ProArena.Domain.Entities.Partida", b =>
                 {
                     b.Property<int>("PartidaId")
@@ -265,6 +302,16 @@ namespace ProArena.Infrastructure.Migrations
                     b.Navigation("Campeonato");
 
                     b.Navigation("Equipe");
+                });
+
+            modelBuilder.Entity("ProArena.Domain.Entities.MovimentacaoFinanceira", b =>
+                {
+                    b.HasOne("ProArena.Domain.Entities.Campeonato", "Campeonato")
+                        .WithMany()
+                        .HasForeignKey("CampeonatoId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Campeonato");
                 });
 
             modelBuilder.Entity("ProArena.Domain.Entities.Partida", b =>

@@ -47,19 +47,16 @@ namespace ProArena.Tests.Services
         }
 
         [Fact]
-        public async Task DeveRetornarSucessoQuandoJogadorNaoEncontrado()
+        public async Task DeveRetornarErroQuandoJogadorNaoEncontrado()
         {
-            // Arrange
             _jogadorRepositoryMock
                 .Setup(r => r.BuscaJogadorPorId(It.IsAny<int>()))
                 .ReturnsAsync((Jogador?)null);
 
-            // Act
             var response = await _jogadorService.BuscaJogadorPorId(999);
 
-            // Assert
-            Assert.False(response.Erro);
-            Assert.Equal(TipoErroOperacaoEnum.Nenhum, response.TipoErro);
+            Assert.True(response.Erro);
+            Assert.Equal(TipoErroOperacaoEnum.NaoEncontrado, response.TipoErro);
             Assert.Null(response.Objeto);
         }
     }

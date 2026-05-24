@@ -12,6 +12,7 @@ namespace ProArena.Application.Services
     {
         private readonly ICampeonatoRepository _campeonatoRepository;
         private readonly IMapper _mapper;
+
         public CampeonatoService(ICampeonatoRepository campeonatoRepository, IMapper mapper)
         {
             _campeonatoRepository = campeonatoRepository;
@@ -22,32 +23,25 @@ namespace ProArena.Application.Services
         {
             try
             {
-                var campeonato = new Campeonato();
+                var campeonato = _mapper.Map<Campeonato>(registraCampeonatoDTO);
+                campeonato.Ativo = true;
 
-                if(registraCampeonatoDTO.Equipes is not null)
+                if (registraCampeonatoDTO.Equipes is not null && registraCampeonatoDTO.Equipes.Count > 0)
                 {
                     foreach (var equipe in registraCampeonatoDTO.Equipes)
                     {
                         var equipeEntity = _mapper.Map<Equipe>(equipe);
                         campeonato.Inscricoes.Add(new Inscricao { Equipe = equipeEntity });
-					}
-
-					campeonato = _mapper.Map<Campeonato>(registraCampeonatoDTO);
-                }
-
-                if (campeonato is null)
-                {
-                    return ResultadoOperacao.Falhou("Erro ao mapear o campeonato.", TipoErroOperacaoEnum.Mapeamento);
+                    }
                 }
 
                 await _campeonatoRepository.AdicionaCampeonato(campeonato);
+                return ResultadoOperacao.Concluido("Campeonato adicionado com sucesso.", TipoErroOperacaoEnum.Nenhum, campeonato);
             }
             catch (Exception ex)
             {
                 return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacaoEnum.Inesperado);
             }
-
-            return ResultadoOperacao.Concluido("Campeonato adicionado com sucesso.", TipoErroOperacaoEnum.Nenhum);
         }
 
         public async Task<ResultadoOperacao> BuscaCampeonatoPorId(int id)
@@ -64,23 +58,15 @@ namespace ProArena.Application.Services
 
         public async Task<ResultadoOperacao> BuscaTodosCampeonatos()
         {
-            var campeonatos = new List<Campeonato>();
-
             try
             {
-                campeonatos = await _campeonatoRepository.BuscaTodosCampeonatos();
-
-                if (campeonatos.Count == 0)
-                {
-                    return ResultadoOperacao.Concluido("Nenhum campeonato encontrado.", TipoErroOperacaoEnum.Nenhum);
-                }
+                var campeonatos = await _campeonatoRepository.BuscaTodosCampeonatos();
+                return ResultadoOperacao.Concluido("Campeonatos encontrados com sucesso.", TipoErroOperacaoEnum.Nenhum, campeonatos);
             }
             catch (Exception ex)
             {
                 return ResultadoOperacao.Falhou(ex.Message, TipoErroOperacaoEnum.Inesperado);
             }
-
-            return ResultadoOperacao.Concluido("Campeonatos encontrados com sucesso.", TipoErroOperacaoEnum.Nenhum, campeonatos);
         }
     }
 }

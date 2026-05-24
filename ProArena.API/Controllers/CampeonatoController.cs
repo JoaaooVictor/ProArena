@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs;
 using ProArena.Application.Interfaces;
+using ProArena.Domain.Enums;
 
 namespace ProArena.API.Controllers
 {
@@ -18,46 +19,45 @@ namespace ProArena.API.Controllers
             _campeonatoService = campeonatoService;
         }
 
-        [HttpGet]
-        [Route("busca-todos-campeonatos")]
+        [HttpGet("busca-todos-campeonatos")]
         public async Task<IActionResult> BuscaCampeonatos()
         {
-            var resultadoOperacao = await _campeonatoService.BuscaTodosCampeonatos();
-
-            if (resultadoOperacao.Erro)
-            {
-                return NotFound(resultadoOperacao.Mensagem);
-            }
-
-            return Ok(resultadoOperacao);
+            var resultado = await _campeonatoService.BuscaTodosCampeonatos();
+            return TrataResultado(resultado);
         }
 
-        [HttpGet]
-        [Route("busca-campeonato-id")]
-        public async Task<IActionResult> BuscaCampeonatoPorId(int id)
+        [HttpGet("busca-campeonato-id")]
+        public async Task<IActionResult> BuscaCampeonatoPorId([FromQuery] int id)
         {
-            var resultadoOperacao = await _campeonatoService.BuscaCampeonatoPorId(id);
-
-            if (resultadoOperacao.Erro)
-            {
-                return NotFound(resultadoOperacao.Mensagem);
-            }
-
-            return Ok(resultadoOperacao);
+            var resultado = await _campeonatoService.BuscaCampeonatoPorId(id);
+            return TrataResultado(resultado);
         }
 
-        [HttpPost]
-        [Route("cria-campeonato")]
+        [HttpPost("cria-campeonato")]
         public async Task<IActionResult> CriaCampeonato(RegistraCampeonatoDTO registraCampeonatoDTO)
         {
-            var resultadoOperacao = await _campeonatoService.AdicionaCampeonato(registraCampeonatoDTO);
+            var resultado = await _campeonatoService.AdicionaCampeonato(registraCampeonatoDTO);
+            return TrataResultado(resultado, created: true);
+        }
 
-            if (resultadoOperacao.Erro)
+        private IActionResult TrataResultado(Application.Utils.ResultadoOperacao resultado, bool created = false)
+        {
+            if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {
-                return NotFound(resultadoOperacao.Mensagem);
+                return NotFound(resultado);
             }
 
-            return Ok(resultadoOperacao);
+            if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.Inesperado)
+            {
+                return StatusCode(500, resultado);
+            }
+
+            if (resultado.Erro)
+            {
+                return BadRequest(resultado);
+            }
+
+            return created ? Created(string.Empty, resultado) : Ok(resultado);
         }
     }
 }

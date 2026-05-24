@@ -9,5 +9,6 @@ namespace ProArena.Application.Interfaces
         Task<ResultadoOperacao> AtualizaJogador(AtualizaJogadorDTO atualizaJogadorDTO);
         Task<ResultadoOperacao> RegistraJogador(RegistraJogadorDTO registraJogadorDTO);
         Task<ResultadoOperacao> BuscaJogadorPorId(int id);
+        Task<ResultadoOperacao> BuscaTodosJogadores();
     }
 }
