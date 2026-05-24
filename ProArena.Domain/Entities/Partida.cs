@@ -8,7 +8,6 @@
         public int CampeonatoId { get; set; }
         public Campeonato Campeonato { get; set; } = null!;
 
-        public int EquipeId { get; set; }
-        public virtual List<Equipe> Equipe { get; set; } = null!;
+        public virtual List<Equipe> Equipes { get; set; } = null!;
     }
 }

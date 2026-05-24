@@ -1,0 +1,24 @@
+footer {
+  margin-top: auto;
+  padding: 24px;
+  background: #f9fafb;
+  border-top: 1px solid #eaecf0;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 16px;
+  }
+}

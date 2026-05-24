@@ -4,10 +4,12 @@ import { Outlet } from 'react-router-dom'
 
 export default function LayoutPublico() {
   return (
-    <>
+    <div className="public-layout">
       <Navbar />
-      <Outlet />
+      <main className="public-main">
+        <Outlet />
+      </main>
       <Footer/>
-    </>
+    </div>
   )
 }

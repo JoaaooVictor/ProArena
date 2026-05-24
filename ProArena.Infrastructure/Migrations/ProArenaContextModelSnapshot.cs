@@ -39,13 +39,13 @@ namespace ProArena.Infrastructure.Migrations
 
             modelBuilder.Entity("EquipePartida", b =>
                 {
-                    b.Property<int>("EquipeId")
+                    b.Property<int>("EquipesEquipeId")
                         .HasColumnType("int");
 
                     b.Property<int>("PartidasPartidaId")
                         .HasColumnType("int");
 
-                    b.HasKey("EquipeId", "PartidasPartidaId");
+                    b.HasKey("EquipesEquipeId", "PartidasPartidaId");
 
                     b.HasIndex("PartidasPartidaId");
 
@@ -132,7 +132,7 @@ namespace ProArena.Infrastructure.Migrations
 
                     b.HasIndex("EquipeId");
 
-                    b.ToTable("Inscricao");
+                    b.ToTable("Inscricoes");
                 });
 
             modelBuilder.Entity("ProArena.Domain.Entities.Jogador", b =>
@@ -215,9 +215,6 @@ namespace ProArena.Infrastructure.Migrations
                     b.Property<DateTime>("DataHora")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EquipeId")
-                        .HasColumnType("int");
-
                     b.HasKey("PartidaId");
 
                     b.HasIndex("CampeonatoId");
@@ -274,7 +271,7 @@ namespace ProArena.Infrastructure.Migrations
                 {
                     b.HasOne("ProArena.Domain.Entities.Equipe", null)
                         .WithMany()
-                        .HasForeignKey("EquipeId")
+                        .HasForeignKey("EquipesEquipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

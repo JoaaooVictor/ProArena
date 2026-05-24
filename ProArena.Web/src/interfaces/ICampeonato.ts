@@ -9,6 +9,13 @@ export interface ICampeonato {
     ativo: boolean;
 }
 
+export interface IRegistraEquipe {
+    Nome: string;
+}
+
+export interface IRegistraPartida {
+}
+
 export interface ICriaCampeonato {
     Nome: string;
     Descricao: string;
@@ -16,4 +23,6 @@ export interface ICriaCampeonato {
     DataFim: string;
     DataInicioInscricao: string;
     DataFimInscricao: string;
+    Equipes: IRegistraEquipe[];
+    Partidas: IRegistraPartida[];
 }

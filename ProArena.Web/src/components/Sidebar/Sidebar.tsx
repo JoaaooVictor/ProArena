@@ -42,6 +42,11 @@ export default function Sidebar() {
           <span>Campeonatos</span>
         </NavLink>
 
+        <NavLink to="/equipes" className={({ isActive }) => (isActive ? "active" : "")}>
+          <i className="fa-solid fa-users"></i>
+          <span>Equipes</span>
+        </NavLink>
+
         <NavLink to="/fluxo-caixa" className={({ isActive }) => (isActive ? "active" : "")}>
           <i className="fa-solid fa-wallet"></i>
           <span>Fluxo de Caixa</span>

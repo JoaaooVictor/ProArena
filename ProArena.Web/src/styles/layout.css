@@ -60,11 +60,31 @@
   margin-top: 2px;
 }
 
+.sidebar .menu-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+
+.sidebar .menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+}
+
 .sidebar nav {
   display: flex;
   flex-direction: column;
   gap: 6px;
   padding: 6px;
+}
+
+.sidebar .user-info {
+  flex: 1;
 }
 
 .sidebar a {
@@ -97,19 +117,49 @@
 }
 
 .sidebar .avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
   background: rgba(148,163,184,.12);
   border: 1px solid rgba(148,163,184,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.sidebar .user-box strong { display: block; font-size: 13px; }
-.sidebar .user-box small { color: var(--muted); }
+.sidebar .user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar .user-box strong {
+  display: block;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar .user-box small {
+  color: var(--muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 100vh;
+}
+
+.main .page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon-btn {
@@ -143,4 +193,34 @@
 
 .logout-btn:hover{
   background: rgba(148,163,184,.10);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    left: -100%;
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main {
+    width: 100%;
+  }
+}
+
+.public-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

@@ -17,6 +17,8 @@ const formInicial: ICriaCampeonato = {
   DataFim: '',
   DataInicioInscricao: '',
   DataFimInscricao: '',
+  Equipes: [],
+  Partidas: [],
 };
 
 export function ModalCampeonato({ isOpen, onClose, onSuccess }: ModalCampeonatoProps) {

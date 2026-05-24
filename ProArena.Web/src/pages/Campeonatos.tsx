@@ -4,6 +4,7 @@ import Loading from '../components/Loading/Loading';
 import { ModalCampeonato } from '../components/Modal/ModalCampeonato';
 import { ICampeonato } from '../interfaces/ICampeonato';
 import { BuscaTodosCampeonatos } from '../services/CampeonatoService';
+import { IniciaCampeonato } from '../services/ChaveamentoService';
 import { FormataData } from '../utils/Formatacao';
 import '../styles/crud.css';
 
@@ -29,6 +30,33 @@ export default function Campeonatos() {
   useEffect(() => {
     carregarCampeonatos();
   }, []);
+
+  async function handleIniciarCampeonato(campeonatoId: number) {
+    if (!window.confirm('Deseja iniciar este campeonato e gerar as chaves?')) return;
+
+    try {
+      setLoading(true);
+      const response = await IniciaCampeonato(campeonatoId);
+      console.log('Resposta ao iniciar campeonato:', response);
+      
+      if (response.data.erro) {
+        console.error('Erro ao iniciar campeonato:', response.data.mensagem);
+        toast.error(response.data.mensagem);
+      } else {
+        console.log('Campeonato iniciado com sucesso:', response.data.mensagem);
+        toast.success(response.data.mensagem);
+        // Recarregar a página para atualizar o estado
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    } catch (error) {
+      console.error('Erro ao iniciar campeonato:', error);
+      toast.error('Erro ao iniciar campeonato.');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -57,6 +85,7 @@ export default function Campeonatos() {
                   <th>Período</th>
                   <th>Inscrições</th>
                   <th>Status</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,6 +105,14 @@ export default function Campeonatos() {
                       <span className={campeonato.ativo ? 'badge-ativo' : 'badge-inativo'}>
                         {campeonato.ativo ? 'Ativo' : 'Inativo'}
                       </span>
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={() => handleIniciarCampeonato(campeonato.campeonatoId)}
+                      >
+                        Iniciar
+                      </button>
                     </td>
                   </tr>
                 ))}

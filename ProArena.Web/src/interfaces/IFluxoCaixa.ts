@@ -29,7 +29,7 @@ export interface IResumoFluxoCaixa {
     quantidadeMovimentacoes: number;
 }
 
-export enum TipoMovimentacao {
+export enum TipoMovimentacaoFinanceira {
     Entrada = 1,
     Saida = 2
 }

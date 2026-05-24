@@ -2,7 +2,7 @@ import '../styles/registrar.css'
 import back from '../assets/home-futvolei.png'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { IRegistraUsuario } from '../interfaces/IUsuario';
+import { IRegistraUsuario, TipoUsuario } from '../interfaces/IUsuario';
 import { RegistraUsuario } from '../services/UsuarioService';
 import { AplicaMascaraCpf } from '../utils/Formatacao';
 import Loading from '../components/Loading/Loading';
@@ -15,6 +15,7 @@ const Registrar = () => {
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
+    const [tipoUsuario, setTipoUsuario] = useState<TipoUsuario>(TipoUsuario.Jogador);
     const [loading, setLoading] = useState(false);
 
     async function formSubmit(e: React.SubmitEvent) {
@@ -28,7 +29,8 @@ const Registrar = () => {
             nome,
             cpf,
             email,
-            senha
+            senha,
+            tipoUsuario
         }
 
         const erro = ValidaCampos(nome, cpf, email, senha, confirmaSenha)
@@ -90,6 +92,18 @@ const Registrar = () => {
                                 </div>
                             </div>
                             <div className='row'>
+                                <div className='col-12'>
+                                    <label>Tipo de Usuário</label>
+                                    <select
+                                        className='form-control'
+                                        value={tipoUsuario}
+                                        onChange={e => setTipoUsuario(Number(e.target.value) as TipoUsuario)}
+                                    >
+                                        <option value={TipoUsuario.Jogador}>Jogador</option>
+                                        <option value={TipoUsuario.QuadraAdmin}>Administrador de Quadra</option>
+                                        <option value={TipoUsuario.ProArenaAdmin}>Administrador ProArena</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className='row'>
                                 <div className='col-12'>

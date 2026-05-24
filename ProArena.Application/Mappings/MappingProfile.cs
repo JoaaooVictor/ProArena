@@ -18,7 +18,9 @@ namespace ProArena.Application.Mappings
             CreateMap<RegistraEquipeDTO, Equipe>()
                 .ForMember(dest => dest.EquipeId, opt => opt.Ignore())
                 .ForMember(dest => dest.Jogadores, opt => opt.Ignore())
-                .ForMember(dest => dest.Partidas, opt => opt.Ignore());
+                .ForMember(dest => dest.Partidas, opt => opt.Ignore())
+                .ForMember(dest => dest.Inscricao, opt => opt.Ignore())
+                .ForMember(dest => dest.NomeExibicao, opt => opt.Ignore());
 
             CreateMap<RegistraUsuarioDTO, Usuario>()
                 .ForMember(r => r.Senha, opt => opt.MapFrom(u => u.Senha))
@@ -44,6 +46,13 @@ namespace ProArena.Application.Mappings
 
             CreateMap<AtualizaMovimentacaoFinanceiraDTO, MovimentacaoFinanceira>()
                 .ForMember(dest => dest.Campeonato, opt => opt.Ignore());
+
+            CreateMap<RegistraPartidaDTO, Partida>()
+                .ForMember(dest => dest.PartidaId, opt => opt.Ignore())
+                .ForMember(dest => dest.Equipes, opt => opt.Ignore());
+
+            CreateMap<AtualizaPartidaDTO, Partida>()
+                .ForMember(dest => dest.Equipes, opt => opt.Ignore());
         }
     }
 }

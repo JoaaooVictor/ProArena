@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Jogadores from './pages/Jogadores'
 import Campeonatos from './pages/Campeonatos'
 import FluxoCaixa from './pages/FluxoCaixa'
+import Equipes from './pages/Equipes'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/jogadores" element={<Jogadores />} />
           <Route path="/campeonatos" element={<Campeonatos />} />
+          <Route path="/equipes" element={<Equipes />} />
           <Route path="/fluxo-caixa" element={<FluxoCaixa />} />
         </Route>
 

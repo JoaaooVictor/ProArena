@@ -7,6 +7,7 @@
         NaoEncontrado = 2,
         NaoAutorizado = 3,
         Mapeamento = 4,
+        Validacao = 5,
         Inesperado = 99
     }
 }

@@ -9,5 +9,7 @@ namespace ProArena.Application.Interfaces
         Task<ResultadoOperacao> BuscaCampeonatoPorId(int id);
         Task<ResultadoOperacao> BuscaTodosCampeonatos();
         Task<ResultadoOperacao> AdicionaCampeonato(RegistraCampeonatoDTO registraCampeonatoDTO);
+        Task<ResultadoOperacao> IniciaCampeonato(int campeonatoId);
+        Task<ResultadoOperacao> BuscaChaveamento(int campeonatoId);
     }
 }

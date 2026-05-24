@@ -1,11 +1,12 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Loading from '../components/Loading/Loading';
 import {
   IMovimentacaoFinanceira,
   IRegistraMovimentacao,
+  IAtualizaMovimentacao,
   IResumoFluxoCaixa,
-  TipoMovimentacao
+  TipoMovimentacaoFinanceira
 } from '../interfaces/IFluxoCaixa';
 import { ICampeonato } from '../interfaces/ICampeonato';
 import { BuscaTodosCampeonatos } from '../services/CampeonatoService';
@@ -13,11 +14,12 @@ import {
   BuscaResumoFluxoCaixa,
   BuscaTodasMovimentacoes,
   RegistraMovimentacao,
+  AtualizaMovimentacao,
   RemoveMovimentacao
 } from '../services/FluxoCaixaService';
+import { ModalFluxoCaixa } from '../components/Modal/ModalFluxoCaixa';
 import { FormataData, FormataMoeda } from '../utils/Formatacao';
 import '../styles/crud.css';
-import '../components/Modal/Modal.css';
 
 export default function FluxoCaixa() {
   const [movimentacoes, setMovimentacoes] = useState<IMovimentacaoFinanceira[]>([]);
@@ -25,13 +27,7 @@ export default function FluxoCaixa() {
   const [campeonatos, setCampeonatos] = useState<ICampeonato[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalAberto, setModalAberto] = useState(false);
-
-  const [descricao, setDescricao] = useState('');
-  const [valor, setValor] = useState('');
-  const [data, setData] = useState(new Date().toISOString().slice(0, 10));
-  const [tipo, setTipo] = useState<TipoMovimentacao>(TipoMovimentacao.Entrada);
-  const [categoria, setCategoria] = useState('');
-  const [campeonatoId, setCampeonatoId] = useState('');
+  const [editando, setEditando] = useState<IMovimentacaoFinanceira | null>(null);
 
   async function carregarDados() {
     try {
@@ -64,50 +60,36 @@ export default function FluxoCaixa() {
     carregarDados();
   }, []);
 
-  function limparFormulario() {
-    setDescricao('');
-    setValor('');
-    setData(new Date().toISOString().slice(0, 10));
-    setTipo(TipoMovimentacao.Entrada);
-    setCategoria('');
-    setCampeonatoId('');
+  async function handleSalvar(dados: IRegistraMovimentacao | IAtualizaMovimentacao) {
+    try {
+      if (editando) {
+        const response = await AtualizaMovimentacao(dados as IAtualizaMovimentacao);
+        if (response.data.erro) {
+          toast.error(response.data.mensagem);
+          return;
+        }
+        toast.success(response.data.mensagem);
+      } else {
+        const response = await RegistraMovimentacao(dados as IRegistraMovimentacao);
+        if (response.data.erro) {
+          toast.error(response.data.mensagem);
+          return;
+        }
+        toast.success(response.data.mensagem);
+      }
+    } catch {
+      toast.error('Erro ao salvar movimentação.');
+    }
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  function abrirNovo() {
+    setEditando(null);
+    setModalAberto(true);
+  }
 
-    if (!descricao.trim() || !valor || !data) {
-      toast.error('Preencha descrição, valor e data.');
-      return;
-    }
-
-    const payload: IRegistraMovimentacao = {
-      Descricao: descricao,
-      Valor: Number(valor),
-      Data: data,
-      Tipo: tipo,
-      Categoria: categoria || undefined,
-      CampeonatoId: campeonatoId ? Number(campeonatoId) : undefined,
-    };
-
-    try {
-      setLoading(true);
-      const response = await RegistraMovimentacao(payload);
-
-      if (response.data.erro) {
-        toast.error(response.data.mensagem);
-        return;
-      }
-
-      toast.success(response.data.mensagem);
-      setModalAberto(false);
-      limparFormulario();
-      await carregarDados();
-    } catch {
-      toast.error('Erro ao registrar movimentação.');
-    } finally {
-      setLoading(false);
-    }
+  function abrirEdicao(movimentacao: IMovimentacaoFinanceira) {
+    setEditando(movimentacao);
+    setModalAberto(true);
   }
 
   async function handleRemover(id: number) {
@@ -139,7 +121,7 @@ export default function FluxoCaixa() {
             <h1 className="crud-title">Fluxo de Caixa</h1>
             <p className="crud-subtitle">Controle entradas e saídas financeiras da quadra</p>
           </section>
-          <button className="btn btn-primary" onClick={() => setModalAberto(true)}>
+          <button className="btn btn-primary" onClick={abrirNovo}>
             <i className="fa-solid fa-plus me-2" />
             Nova movimentação
           </button>
@@ -182,18 +164,26 @@ export default function FluxoCaixa() {
                     <td>{item.descricao}</td>
                     <td>{item.categoria || '-'}</td>
                     <td>
-                      <span className={item.tipo === TipoMovimentacao.Entrada ? 'badge-entrada' : 'badge-saida'}>
-                        {item.tipo === TipoMovimentacao.Entrada ? 'Entrada' : 'Saída'}
+                      <span className={item.tipo === TipoMovimentacaoFinanceira.Entrada ? 'badge-entrada' : 'badge-saida'}>
+                        {item.tipo === TipoMovimentacaoFinanceira.Entrada ? 'Entrada' : 'Saída'}
                       </span>
                     </td>
                     <td>{FormataMoeda(item.valor)}</td>
                     <td>
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => handleRemover(item.movimentacaoFinanceiraId)}
-                      >
-                        Excluir
-                      </button>
+                      <div className="crud-actions">
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={() => abrirEdicao(item)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => handleRemover(item.movimentacaoFinanceiraId)}
+                        >
+                          Excluir
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -203,74 +193,14 @@ export default function FluxoCaixa() {
         </section>
       </section>
 
-      {modalAberto && (
-        <section className="modal-overlay">
-          <article className="custom-modal modal-lg">
-            <header className="modal-header">
-              <h2>Nova movimentação</h2>
-              <button className='btn btn-outline-danger' type="button" onClick={() => setModalAberto(false)}>X</button>
-            </header>
-
-            <form onSubmit={handleSubmit}>
-              <section className="modal-content ">
-                <section>
-                  <label>Descrição</label>
-                  <input className="form-control" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-                </section>
-                <section>
-                  <label>Valor (R$)</label>
-                  <input
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    className="form-control"
-                    value={valor}
-                    onChange={(e) => setValor(e.target.value)}
-                  />
-                </section>
-                <section>
-                  <label>Data</label>
-                  <input type="date" className="form-control" value={data} onChange={(e) => setData(e.target.value)} />
-                </section>
-                <section>
-                  <label>Tipo</label>
-                  <select className="form-select" value={tipo} onChange={(e) => setTipo(Number(e.target.value))}>
-                    <option value={TipoMovimentacao.Entrada}>Entrada</option>
-                    <option value={TipoMovimentacao.Saida}>Saída</option>
-                  </select>
-                </section>
-                <section>
-                  <label>Categoria</label>
-                  <input
-                    className="form-control"
-                    value={categoria}
-                    onChange={(e) => setCategoria(e.target.value)}
-                    placeholder="Ex: Aluguel, Inscrição, Manutenção"
-                  />
-                </section>
-                <section>
-                  <label>Campeonato (opcional)</label>
-                  <select className="form-select" value={campeonatoId} onChange={(e) => setCampeonatoId(e.target.value)}>
-                    <option value="">Nenhum</option>
-                    {campeonatos.map((camp) => (
-                      <option key={camp.campeonatoId} value={camp.campeonatoId}>
-                        {camp.nome}
-                      </option>
-                    ))}
-                  </select>
-                </section>
-              </section>
-
-              <footer className="modal-footer">
-                <button type="button" className="btn btn-outline-secondary" onClick={() => setModalAberto(false)}>
-                  Cancelar
-                </button>
-                <button type="submit" className="btn btn-primary">Salvar</button>
-              </footer>
-            </form>
-          </article>
-        </section>
-      )}
+      <ModalFluxoCaixa
+        isOpen={modalAberto}
+        onClose={() => setModalAberto(false)}
+        onSuccess={carregarDados}
+        campeonatos={campeonatos}
+        movimentacaoEditando={editando}
+        onSalvar={handleSalvar}
+      />
     </>
   );
 }

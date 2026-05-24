@@ -19,6 +19,8 @@ namespace ProArena.Infrastructure.Injection
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IJogadorRepository, JogadorRepository>();
             services.AddScoped<IMovimentacaoFinanceiraRepository, MovimentacaoFinanceiraRepository>();
+            services.AddScoped<IEquipeRepository, EquipeRepository>();
+            services.AddScoped<IPartidaRepository, PartidaRepository>();
 
             return services;
         }
