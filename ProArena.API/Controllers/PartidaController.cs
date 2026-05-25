@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Campeonatos;
 using ProArena.Application.Interfaces;
+using ProArena.Application.Utils;
 using ProArena.Domain.Enums;
 
 namespace ProArena.API.Controllers
@@ -71,7 +72,7 @@ namespace ProArena.API.Controllers
             return TrataResultado(resultado);
         }
 
-        private IActionResult TrataResultado(Application.Utils.ResultadoOperacao resultado, bool created = false)
+        private IActionResult TrataResultado(ResultadoOperacao resultado, bool created = false)
         {
             if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Equipes;
 using ProArena.Application.Interfaces;
+using ProArena.Application.Utils;
 using ProArena.Domain.Enums;
 
 namespace ProArena.API.Controllers
@@ -12,24 +13,24 @@ namespace ProArena.API.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EquipeController : ControllerBase
     {
-        private readonly IEquipeService _service;
+        private readonly IEquipeService _equipeService;
 
         public EquipeController(IEquipeService service)
         {
-            _service = service;
+            _equipeService = service;
         }
 
         [HttpGet("busca-todos")]
         public async Task<IActionResult> BuscaTodos()
         {
-            var resultado = await _service.BuscaTodos();
+            var resultado = await _equipeService.BuscaTodos();
             return TrataResultado(resultado);
         }
 
         [HttpGet("busca-por-id")]
         public async Task<IActionResult> BuscaPorId([FromQuery] int id)
         {
-            var resultado = await _service.BuscaPorId(id);
+            var resultado = await _equipeService.BuscaPorId(id);
             return TrataResultado(resultado);
         }
 
@@ -41,7 +42,7 @@ namespace ProArena.API.Controllers
                 return BadRequest();
             }
 
-            var resultado = await _service.RegistraEquipe(dto);
+            var resultado = await _equipeService.RegistraEquipe(dto);
             return TrataResultado(resultado, created: true);
         }
 
@@ -53,18 +54,18 @@ namespace ProArena.API.Controllers
                 return BadRequest();
             }
 
-            var resultado = await _service.AtualizaEquipe(dto);
+            var resultado = await _equipeService.AtualizaEquipe(dto);
             return TrataResultado(resultado);
         }
 
         [HttpDelete("remove")]
         public async Task<IActionResult> Remove([FromQuery] int id)
         {
-            var resultado = await _service.Remove(id);
+            var resultado = await _equipeService.Remove(id);
             return TrataResultado(resultado);
         }
 
-        private IActionResult TrataResultado(Application.Utils.ResultadoOperacao resultado, bool created = false)
+        private IActionResult TrataResultado(ResultadoOperacao resultado, bool created = false)
         {
             if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {

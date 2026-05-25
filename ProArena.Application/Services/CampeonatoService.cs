@@ -5,6 +5,7 @@ using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 using ProArena.Domain.Interfaces;
 using ProArena.Application.DTOs.Campeonatos;
+using ProArena.Application.DTOs.Equipes;
 
 namespace ProArena.Application.Services
 {

@@ -5,6 +5,7 @@ using ProArena.Application.Utils;
 using ProArena.Domain.Entities;
 using ProArena.Domain.Interfaces;
 using ProArena.Application.DTOs.Equipes;
+using ProArena.Application.DTOs.Jogadores;
 
 namespace ProArena.Application.Services
 {
@@ -106,8 +107,8 @@ namespace ProArena.Application.Services
                 Nome = equipe.Nome,
                 NomeExibicao = equipe.NomeExibicao,
                 CampeonatoId = equipe.CampeonatoId,
-                Jogadores = equipe.Jogadores.Select(j => new JogadorDTO
-                {
+				Jogadores = equipe.Jogadores.Select(j => new JogadorDTO
+				{
                     JogadorId = j.JogadorId,
                     Nome = j.Nome,
                     Cpf = j.Cpf,
