@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProArena.Application.DTOs.Jogadores;
 using ProArena.Application.Interfaces;
+using ProArena.Application.Utils;
 using ProArena.Domain.Enums;
 
 namespace ProArena.API.Controllers
@@ -42,7 +43,7 @@ namespace ProArena.API.Controllers
             }
 
             var resultado = await _jogadorService.RegistraJogador(registraJogadorDTO);
-            return TrataResultado(resultado, created: true);
+            return TrataResultado(resultado, criacao: true);
         }
 
         [HttpPut("atualiza-jogador")]
@@ -57,7 +58,7 @@ namespace ProArena.API.Controllers
             return TrataResultado(resultado);
         }
 
-        private IActionResult TrataResultado(Application.Utils.ResultadoOperacao resultado, bool created = false)
+        private IActionResult TrataResultado(ResultadoOperacao resultado, bool criacao = false)
         {
             if (resultado.Erro && resultado.TipoErro == TipoErroOperacaoEnum.NaoEncontrado)
             {
@@ -74,7 +75,7 @@ namespace ProArena.API.Controllers
                 return BadRequest(resultado);
             }
 
-            return created ? Created(string.Empty, resultado) : Ok(resultado);
+            return criacao ? Created(string.Empty, resultado) : Ok(resultado);
         }
     }
 }
