@@ -151,7 +151,14 @@ namespace ProArena.Application.Services
                 var partidas = await _partidaRepository.BuscaPorCampeonato(campeonatoId);
                 if (!partidas.Any())
                 {
-                    return ResultadoOperacao.Falhou("Nenhuma partida encontrada para este campeonato.", TipoErroOperacaoEnum.NaoEncontrado);
+                    // Retornar chaveamento vazio em vez de erro
+                    var chaveamentoVazio = new ChaveamentoDTO
+                    {
+                        CampeonatoId = campeonatoId,
+                        CampeonatoNome = campeonato.Nome,
+                        Rodadas = new List<RodadaDTO>()
+                    };
+                    return ResultadoOperacao.Concluido("Nenhuma partida encontrada. O campeonato precisa ser iniciado para gerar o chaveamento.", TipoErroOperacaoEnum.Nenhum, chaveamentoVazio);
                 }
 
                 // Agrupar partidas por rodada (baseado na data)

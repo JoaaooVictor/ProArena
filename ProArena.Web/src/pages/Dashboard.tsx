@@ -48,7 +48,7 @@ export default function Dashboard() {
         setTotalMovimentacoes(fluxoRes.data.objeto.quantidadeMovimentacoes);
       }
     } catch {
-      // Mantém zeros se a API não estiver disponível
+      
     }
   }
 
@@ -61,14 +61,12 @@ export default function Dashboard() {
           setPartidas(response.data.objeto ?? []);
         }
         
-        // Tentar carregar o chaveamento
         const chaveamentoResponse = await BuscaChaveamento(campeonatoAtivo.campeonatoId);
         if (!chaveamentoResponse.data.erro) {
           setChaveamento(chaveamentoResponse.data.objeto);
         }
       }
     } catch {
-      // Ignora erro ao carregar partidas
     }
   }
 
@@ -137,7 +135,7 @@ export default function Dashboard() {
 
       {chaveamento && (
         <section className="bracket-section">
-          <Bracket chaveamento={chaveamento} />
+          <Bracket chaveamento={chaveamento} onChaveamentoUpdate={carregarPartidas} />
         </section>
       )}
 

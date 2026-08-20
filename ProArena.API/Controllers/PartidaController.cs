@@ -65,6 +65,18 @@ namespace ProArena.API.Controllers
             return TrataResultado(resultado);
         }
 
+        [HttpPost("registra-resultado")]
+        public async Task<IActionResult> RegistraResultado(RegistraResultadoPartidaDTO dto)
+        {
+            if (dto is null)
+            {
+                return BadRequest();
+            }
+
+            var resultado = await _service.RegistraResultado(dto);
+            return TrataResultado(resultado);
+        }
+
         [HttpDelete("remove")]
         public async Task<IActionResult> Remove([FromQuery] int id)
         {

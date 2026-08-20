@@ -7,6 +7,7 @@ namespace ProArena.Application.Interfaces
     {
         Task<ResultadoOperacao> RegistraPartida(RegistraPartidaDTO dto);
         Task<ResultadoOperacao> AtualizaPartida(AtualizaPartidaDTO dto);
+        Task<ResultadoOperacao> RegistraResultado(RegistraResultadoPartidaDTO dto);
         Task<ResultadoOperacao> BuscaPorId(int id);
         Task<ResultadoOperacao> BuscaPorCampeonato(int campeonatoId);
         Task<ResultadoOperacao> BuscaTodos();

@@ -22,6 +22,9 @@ namespace ProArena.Infrastructure.Database.ConfigModels
                .WithMany(c => c.Partidas)
                .HasForeignKey(p => p.CampeonatoId)
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(p => p.VencedorId).IsRequired(false);
+            builder.Property(p => p.Concluido).HasDefaultValue(false);
         }
     }
 }

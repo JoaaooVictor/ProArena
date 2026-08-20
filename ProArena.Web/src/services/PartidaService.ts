@@ -31,3 +31,7 @@ export function AtualizaPartida(partida: IAtualizaPartida) {
 export function RemovePartida(id: number) {
   return api.delete<IResultadoOperacao<string>>(`${PATH}/remove?id=${id}`);
 }
+
+export function RegistraResultadoPartida(dto: { partidaId: number; vencedorId: number }) {
+  return api.post<IResultadoOperacao<IPartida>>(`${PATH}/registra-resultado`, dto);
+}
